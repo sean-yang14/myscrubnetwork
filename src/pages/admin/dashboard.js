@@ -1,14 +1,8 @@
 import { useState } from 'react'
-import { Switch} from '@headlessui/react'
-import {
-  Bars3BottomLeftIcon,
-  BellIcon,
-} from '@heroicons/react/24/outline'
-import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
-import {
-  ClipboardDocumentIcon
-} from '@heroicons/react/24/outline'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import { db } from '../../../lib/firebase.config'
 import Image from 'next/image'
+import { toast } from 'react-toastify'
 import MainCard from '@/components/main-card'
 
 const formEntries = [
@@ -22,12 +16,168 @@ const formEntries = [
   {label: 'Salary Range', type: 'text', name: 'salary', id: 'salary', placeholder: '$100,000', aria: 'salary range'},
   {label: 'Salary Interval', type: 'text', name: 'interval', id: 'interval', placeholder: 'Year'},
   {label: 'Schedule', type: 'text', name: 'schedule', id: 'schedule', placeholder: 'Full Time', aria: 'dentist schedule'},
-  {label: 'Phone Number', type: 'text', name: 'phone', id: 'phone', placeholder: '847-313-0000', aria: 'practice phone number'},
-  {label: 'Email', type: 'email', name: 'email', id: 'email', placeholder: 'info@scrubnetwork.com', aria: 'practice email'},
+  // {label: 'Phone Number', type: 'text', name: 'phone', id: 'phone', placeholder: '847-313-0000', aria: 'practice phone number'},
+  // {label: 'Email', type: 'email', name: 'email', id: 'email', placeholder: 'info@scrubnetwork.com', aria: 'practice email'},
 ]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
+}
+
+function NewListing() {
+  const [loading, setLoading] = useState(false)
+  const [post, setPost] = useState({
+    title: "",
+    name: "",
+    website: "",
+    address: "",
+    city: "",
+    state: "",
+    zip: "",
+    salary: "",
+    interval: "",
+    schedule: "",
+    description: "",
+  })
+
+  const handleChange = (e) => {
+    setPost({
+      ...post,
+      [e.target.id]: e.target.value
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+
+    // Maybe Later: Add validations here
+
+    const postCopy = {
+      ...post,
+      timestamp: serverTimestamp()
+    }
+
+    // Delete
+    for (let i = 0; i < 30; i++) {
+      const docRef = await addDoc(collection(db, 'listings'), postCopy)
+    }
+    setLoading(false)
+    toast.success('Listing Saved')
+  }
+
+  return (
+    <>
+      <div className="px-4 sm:px-6 md:px-0">
+        {/* Description list with inline editing */}
+        <div className="mt-10">
+          <div className="space-y-1">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">New Listing</h3>
+          </div>
+          <form onSubmit={handleSubmit}>
+            <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2 lg:grid-cols-3">
+              {formEntries.map((entry, i) => {
+                return (
+                  <div key={i}>
+                    <div className="flex justify-between">
+                      <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+                        {entry.label}
+                      </label>
+                    </div>
+                    <div className="mt-1">
+                      <input
+                        type={entry.type}
+                        name={entry.name}
+                        id={entry.id}
+                        onChange = {handleChange}
+                        value={post[entry.id]}
+                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        placeholder={entry.placeholder}
+                        aria-describedby={entry.aria}
+                      />
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+            <div className='mt-6'>
+              <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+                Full Description
+              </label>
+              <textarea className='mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500' name="description" id="description" value={post.description} onChange={handleChange} cols="20" rows="5"></textarea>
+            </div>
+            <div className='mt-8'>
+              <button
+                type="submit"
+                className="rounded-md border border-transparent bg-indigo-600 py-2 px-8 font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                {loading 
+                  ? 'Loading...'
+                  : 'Save'
+                }
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
+  )
+}
+
+function DeleteListing() {
+  return (
+    <>
+      <div className="px-4 sm:px-6 md:px-0">
+        {/* Description list with inline editing */}
+        <div className="mt-10">
+          <div className="space-y-1">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Delete Listing</h3>
+          </div>
+          <form action="">
+            <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2 lg:grid-cols-3">
+              {formEntries.map((entry, i) => {
+                return (
+                  <div key={i}>
+                    <div className="flex justify-between">
+                      <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+                        {entry.label}
+                      </label>
+                    </div>
+                    <div className="mt-1">
+                      <input
+                        type={entry.type}
+                        name={entry.name}
+                        id={entry.title}
+                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        placeholder={entry.placeholder}
+                        aria-describedby={entry.aria}
+                      />
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+            <div className='mt-8'>
+              <button
+                type="submit"
+                className="rounded-md border border-transparent bg-indigo-600 py-2 px-8 font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
+  )
+}
+
+function Rewards() {
+  <>
+    <div className="mt-10">
+      <h1 className='text-lg'>rewards</h1>
+    </div>
+  </>
 }
 
 export default function Dashboard() {
@@ -48,110 +198,6 @@ export default function Dashboard() {
     { name: 'Rewards', id: 'rewards', current: selected.rewards },
   ]
 
-  function NewListing() {
-    return (
-      <>
-        <div className="px-4 sm:px-6 md:px-0">
-          {/* Description list with inline editing */}
-          <div className="mt-10">
-            <div className="space-y-1">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">New Listing</h3>
-            </div>
-            <form action="">
-              <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2 lg:grid-cols-3">
-                {formEntries.map((entry, i) => {
-                  return (
-                    <div key={i}>
-                      <div className="flex justify-between">
-                        <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-                          {entry.label}
-                        </label>
-                      </div>
-                      <div className="mt-1">
-                        <input
-                          type={entry.type}
-                          name={entry.name}
-                          id={entry.title}
-                          className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                          placeholder={entry.placeholder}
-                          aria-describedby={entry.aria}
-                        />
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-              <div className='mt-8'>
-                <button
-                  type="submit"
-                  className="rounded-md border border-transparent bg-indigo-600 py-2 px-8 font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  Save
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </>
-    )
-  }
-
-  function DeleteListing() {
-    return (
-      <>
-        <div className="px-4 sm:px-6 md:px-0">
-          {/* Description list with inline editing */}
-          <div className="mt-10">
-            <div className="space-y-1">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">Delete Listing</h3>
-            </div>
-            <form action="">
-              <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2 lg:grid-cols-3">
-                {formEntries.map((entry, i) => {
-                  return (
-                    <div key={i}>
-                      <div className="flex justify-between">
-                        <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-                          {entry.label}
-                        </label>
-                      </div>
-                      <div className="mt-1">
-                        <input
-                          type={entry.type}
-                          name={entry.name}
-                          id={entry.title}
-                          className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                          placeholder={entry.placeholder}
-                          aria-describedby={entry.aria}
-                        />
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-              <div className='mt-8'>
-                <button
-                  type="submit"
-                  className="rounded-md border border-transparent bg-indigo-600 py-2 px-8 font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  Save
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </>
-    )
-  }
-
-  function Rewards() {
-    <>
-      <div className="mt-10">
-        <h1 className='text-lg'>rewards</h1>
-      </div>
-    </>
-  }
-
   const handleTabSelected = (e) => {
     setSelected(() => ({
       ...noneSelected,
@@ -159,6 +205,7 @@ export default function Dashboard() {
     }))
   }
   
+
   return (
     <>
       <MainCard>

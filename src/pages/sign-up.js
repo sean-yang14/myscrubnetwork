@@ -9,7 +9,7 @@ import {
   updateProfile
 } from 'firebase/auth'
 import {setDoc, doc, serverTimestamp} from 'firebase/firestore'
-import {db} from '../../firebase.config'
+import {db} from '../../lib/firebase.config'
 import OAuth from '@/components/OAuth'
 
 export default function SignUp() {

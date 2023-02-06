@@ -12,7 +12,7 @@ import {
 	limit,
 	startAfter,
 } from 'firebase/firestore';
-import { db } from '../../firebase.config';
+import { db } from '../../lib/firebase.config';
 
 const inter = Inter({ subsets: ['latin'] });
 

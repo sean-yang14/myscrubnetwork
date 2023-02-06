@@ -10,275 +10,8 @@ import {
   limit,
   startAfter,
 } from 'firebase/firestore'
-import { db } from '../../firebase.config'
+import { db } from '../../lib/firebase.config'
 import { toast } from 'react-toastify'
-
-const directory = [
-  {
-    title: 'Specialist',
-    company: 'Tend',
-    location: 'New York, New York',
-    companyAddress: '1277 Third Ave, New York, New York, 10021',
-    compensation: '40,000 a year',
-    schedule: 'Part-Time',
-    items: [
-      'ilumenasd desl',
-      'ilumenasd desl',
-      'ilumenasd desl',
-    ],
-    profileImage:
-    'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    coverImage:
-    'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    benefits: [
-      '401k',
-      'sign on bonus'
-    ],
-    fullDescription: 'lots of words'
-  },
-  {
-    title: 'General Dentist',
-    company: 'Tend',
-    location: 'New York, New York',
-    address: '1277 Third Ave, New York, New York, 10021',
-    compensation: '40,000 a year',
-    schedule: 'Part-Time',
-    items: [
-      'ilumenasd desl',
-      'ilumenasd desl',
-      'ilumenasd desl',
-    ],
-    profileImage:
-    'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    coverImage:
-    'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    benefits: [
-      '401k',
-      'sign on bonus'
-    ],
-    fullDescription: 'Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu. Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu. Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu.'
-  },
-  {
-    title: 'PEDs',
-    company: 'Tend',
-    location: 'New York, New York',
-    companyAddress: '1277 Third Ave, New York, New York, 10021',
-    compensation: '40,000 a year',
-    schedule: 'Part-Time',
-    items: [
-      'ilumenasd desl',
-      'ilumenasd desl',
-      'ilumenasd desl',
-    ],
-    profileImage:
-    'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    coverImage:
-    'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    benefits: [
-      '401k',
-      'sign on bonus'
-    ],
-    fullDescription: 'lots of words'
-  },
-  {
-    title: 'Dentist',
-    company: 'Tend',
-    location: 'New York, New York',
-    companyAddress: '1277 Third Ave, New York, New York, 10021',
-    compensation: '40,000 a year',
-    schedule: 'Part-Time',
-    items: [
-      'ilumenasd desl',
-      'ilumenasd desl',
-      'ilumenasd desl',
-    ],
-    profileImage:
-    'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    coverImage:
-    'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    benefits: [
-      '401k',
-      'sign on bonus'
-    ],
-    fullDescription: 'lots of words'
-  },
-  {
-    title: 'Dentist',
-    company: 'Tend',
-    location: 'New York, New York',
-    companyAddress: '1277 Third Ave, New York, New York, 10021',
-    compensation: '40,000 a year',
-    schedule: 'Part-Time',
-    items: [
-      'ilumenasd desl',
-      'ilumenasd desl',
-      'ilumenasd desl',
-    ],
-    profileImage:
-    'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    coverImage:
-    'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    benefits: [
-      '401k',
-      'sign on bonus'
-    ],
-    fullDescription: 'lots of words'
-  },
-  {
-    title: 'Dentist',
-    company: 'Tend',
-    location: 'New York, New York',
-    companyAddress: '1277 Third Ave, New York, New York, 10021',
-    compensation: '40,000 a year',
-    schedule: 'Part-Time',
-    items: [
-      'ilumenasd desl',
-      'ilumenasd desl',
-      'ilumenasd desl',
-    ],
-    profileImage:
-    'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    coverImage:
-    'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    benefits: [
-      '401k',
-      'sign on bonus'
-    ],
-    fullDescription: 'lots of words'
-  },
-  {
-    title: 'Dentist',
-    company: 'Tend',
-    location: 'New York, New York',
-    companyAddress: '1277 Third Ave, New York, New York, 10021',
-    compensation: '40,000 a year',
-    schedule: 'Part-Time',
-    items: [
-      'ilumenasd desl',
-      'ilumenasd desl',
-      'ilumenasd desl',
-    ],
-    profileImage:
-    'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    coverImage:
-    'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    benefits: [
-      '401k',
-      'sign on bonus'
-    ],
-    fullDescription: 'lots of words'
-  },
-  {
-    title: 'Dentist',
-    company: 'Tend',
-    location: 'New York, New York',
-    companyAddress: '1277 Third Ave, New York, New York, 10021',
-    compensation: '40,000 a year',
-    schedule: 'Part-Time',
-    items: [
-      'ilumenasd desl',
-      'ilumenasd desl',
-      'ilumenasd desl',
-    ],
-    profileImage:
-    'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    coverImage:
-    'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    benefits: [
-      '401k',
-      'sign on bonus'
-    ],
-    fullDescription: 'lots of words'
-  },
-  {
-    title: 'Dentist',
-    company: 'Tend',
-    location: 'New York, New York',
-    companyAddress: '1277 Third Ave, New York, New York, 10021',
-    compensation: '40,000 a year',
-    schedule: 'Part-Time',
-    items: [
-      'ilumenasd desl',
-      'ilumenasd desl',
-      'ilumenasd desl',
-    ],
-    profileImage:
-    'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    coverImage:
-    'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    benefits: [
-      '401k',
-      'sign on bonus'
-    ],
-    fullDescription: 'lots of words'
-  },
-  {
-    title: 'Dentist',
-    company: 'Tend',
-    location: 'New York, New York',
-    companyAddress: '1277 Third Ave, New York, New York, 10021',
-    compensation: '40,000 a year',
-    schedule: 'Part-Time',
-    items: [
-      'ilumenasd desl',
-      'ilumenasd desl',
-      'ilumenasd desl',
-    ],
-    profileImage:
-    'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    coverImage:
-    'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    benefits: [
-      '401k',
-      'sign on bonus'
-    ],
-    fullDescription: 'lots of words'
-  },
-  {
-    title: 'Dentist',
-    company: 'Tend',
-    location: 'New York, New York',
-    companyAddress: '1277 Third Ave, New York, New York, 10021',
-    compensation: '40,000 a year',
-    schedule: 'Part-Time',
-    items: [
-      'ilumenasd desl',
-      'ilumenasd desl',
-      'ilumenasd desl',
-    ],
-    profileImage:
-    'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    coverImage:
-    'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    benefits: [
-      '401k',
-      'sign on bonus'
-    ],
-    fullDescription: 'lots of words'
-  },
-  {
-    title: 'End',
-    company: 'Tend',
-    location: 'New York, New York',
-    companyAddress: '1277 Third Ave, New York, New York, 10021',
-    compensation: '40,000 a year',
-    schedule: 'Part-Time',
-    items: [
-      'ilumenasd desl',
-      'ilumenasd desl',
-      'ilumenasd desl',
-    ],
-    profileImage:
-    'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    coverImage:
-    'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    benefits: [
-      '401k',
-      'sign on bonus'
-    ],
-    fullDescription: 'lots of words'
-  },
-]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -287,7 +20,7 @@ function classNames(...classes) {
 export default function Example() {
   const [listings, setListings] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [selectedJob, setSelectedJob] = useState(directory[0])
+  const [selectedJob, setSelectedJob] = useState()
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -309,8 +42,9 @@ export default function Example() {
 
         querySnap.forEach((doc) => {
           return listings.push({
-            id: doc.id,
-            data: doc.data()
+            // id: doc.id,
+            // data: doc.data()
+            ...doc.data()
           })
         })
         
@@ -325,10 +59,21 @@ export default function Example() {
   }, [])
 
   // Pagination
-  const onFetchMoreListings = async () => {}
+  // const onFetchMoreListings = async () => {
+  //   try {
+  //     // Get reference
+  //     const listingsRef = collection(db, 'listings')
+
+  //     // Create a query
+  //     const q = query(
+  //       listingsRef,
+  //       limit(3)
+  //     )
+  //   }
+  // }
 
   const handleClick = (e) => {
-    setSelectedJob(directory[e.currentTarget.id])
+    setSelectedJob(listings[e.currentTarget.id])
   }
 
   const limit = 3;
@@ -342,10 +87,10 @@ export default function Example() {
     setCurrentPage(currentPage + 1)
   }
 
-  const totalPages = Math.ceil(directory.length / limit)
-  const startIndex = (currentPage - 1) * limit
-  const endIndex = startIndex + limit
-  const jobs = directory.slice(startIndex, endIndex)
+  // const totalPages = Math.ceil(directory.length / limit)
+  // const startIndex = (currentPage - 1) * limit
+  // const endIndex = startIndex + limit
+  // const jobs = directory.slice(startIndex, endIndex)
 
   console.log('hi', listings)
 
@@ -361,7 +106,7 @@ export default function Example() {
               <nav className="flex items-start px-4 py-3 sm:px-6 lg:px-8 md:hidden" aria-label="Breadcrumb">
                 <a href="#" className="inline-flex items-center space-x-3 text-sm font-medium text-gray-900">
                   <ChevronLeftIcon className="-ml-2 h-5 w-5 text-gray-400" aria-hidden="true" />
-                  <span>Directory</span>
+                  <span>Listings</span>
                 </a>
               </nav>
 
@@ -397,20 +142,12 @@ export default function Example() {
                   </form>
                 </div>
                 {/* Job list */}
-                <div className="min-h-0 flex-1 overflow-y-auto" aria-label="Directory">
+                <div className="min-h-0 flex-1 overflow-y-auto" aria-label="listings">
                   <ul>
-                    {/* {jobs.map((job, i) => {
+                    {listings?.map((job, i) => {
                       return (
                           <li key={i} id={i} onClick={handleClick}>
                             <DirectoryCard job={job}/>
-                          </li>
-                      )
-                    })} */}
-                    {listings?.map((listing, i) => {
-                      return (
-                          <li key={i} id={i} onClick={handleClick}>
-                            {/* <DirectoryCard job={listing}/> */}
-                            {listing.data.employer}
                           </li>
                       )
                     })}
@@ -418,7 +155,7 @@ export default function Example() {
                 </div>
 
                 {/* Page numbers */}
-                <nav
+                {/* <nav
                   className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
                   aria-label="Pagination"
                 >
@@ -444,25 +181,25 @@ export default function Example() {
                       Next
                     </button>
                   </div>
-                </nav>
+                </nav> */}
               </article>
             </main>
 
             <article className="overflow-y-auto sticky top-0 h-screen hidden border-r border-gray-200 md:order-last md:flex md:flex-col">
               {/* Profile header */}
               <div>
-                {selectedJob.coverImage && 
+                {selectedJob?.coverImage && 
                   (
                     <div>
-                      <img className="h-32 w-full object-cover lg:h-48" src={selectedJob.coverImage} alt="" />
+                      <img className="h-32 w-full object-cover lg:h-48" src={selectedJob?.coverImage} alt="" />
                     </div>
                   )
                 }
                 <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-                  {selectedJob.profileImage && 
+                  {selectedJob?.profileImage && 
                     (
                       <div className={classNames(
-                        selectedJob.coverImage 
+                        selectedJob?.coverImage 
                           ? '-mt-12 sm:-mt-16' 
                           : 'mt-6',
                         "sm:flex sm:items-end sm:space-x-5"
@@ -470,7 +207,7 @@ export default function Example() {
                         <div className="flex">
                           <img
                             className="h-24 w-24 rounded-lg ring-4 ring-white sm:h-32 sm:w-32"
-                            src={selectedJob.profileImage}
+                            src={selectedJob?.profileImage}
                             alt=""
                           />
                         </div>
@@ -478,16 +215,16 @@ export default function Example() {
                     )
                   }
                   <div className="mt-8 hidden min-w-0 flex-1 sm:block 2xl:hidden">
-                    <h1 className="truncate text-2xl font-bold text-gray-900">{selectedJob.title}</h1>
+                    <h1 className="truncate text-2xl font-bold text-gray-900">{selectedJob?.title}</h1>
                     <h2 className='text-gray-500 font-medium text-xl'>
-                      {selectedJob.company}
+                      {selectedJob?.name}
                     </h2>
                     <div>
                       <span>
                         icon
                       </span>
                       <p className='ml-2 inline text-gray-500 font-medium'>
-                        {selectedJob.address}
+                        {`${selectedJob?.address}, ${selectedJob?.city}, ${selectedJob?.state}, ${selectedJob?.zip}`}
                       </p>
                     </div>
                     <button
@@ -505,13 +242,13 @@ export default function Example() {
                 <dl className="divide-y divide-gray-200">
                   <div className="py-4">
                     <dt className="text-lg font-medium text-gray-500">Salary</dt>
-                    <dd className="mt-1 text-gray-900 ">{selectedJob.compensation}</dd>
+                    <dd className="mt-1 text-gray-900 ">{`${selectedJob?.salary} per ${selectedJob?.interval}`}</dd>
                   </div>
                   <div className="py-4">
                     <dt className="text-lg font-medium text-gray-500">Schedule</dt>
-                    <dd className="mt-1 text-gray-900 ">{selectedJob.schedule}</dd>
+                    <dd className="mt-1 text-gray-900 ">{selectedJob?.schedule}</dd>
                   </div>
-                  {selectedJob.benefits
+                  {selectedJob?.benefits
                     && (
                         <div className="py-4">
                           <dt className="text-lg font-medium text-gray-500">Benefits</dt>
@@ -529,7 +266,7 @@ export default function Example() {
                   }
                   <div className="py-4">
                     <dt className="text-lg font-medium text-gray-500">Full Job Description</dt>
-                    <dd className="mt-1 text-gray-900 ">{selectedJob.fullDescription}</dd>
+                    <dd className="mt-1 text-gray-900 ">{selectedJob?.description}</dd>
                   </div>
                 </dl>
               </div>

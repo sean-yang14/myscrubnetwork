@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '../../firebase.config';
+import { db } from '../../lib/firebase.config';
 import { toast } from 'react-toastify';
 import Image from 'next/image';
 
