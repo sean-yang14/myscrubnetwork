@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
-import { db } from '../../../lib/firebase.config'
+import { db } from '../../../../lib/firebase.config'
 import Image from 'next/image'
 import { toast } from 'react-toastify'
 import MainCard from '@/components/main-card'
+import {useRouter} from 'next/router'
 
 const formEntries = [
   {label: 'Position Title', type: 'text', name: 'title', id: 'title', placeholder: 'Associate Dentist', aria: 'position title'},
@@ -59,7 +60,7 @@ function NewListing() {
     }
 
     // Delete
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 10; i++) {
       const docRef = await addDoc(collection(db, 'listings'), postCopy)
     }
     setLoading(false)
@@ -124,14 +125,14 @@ function NewListing() {
   )
 }
 
-function DeleteListing() {
+function UpdateListing() {
   return (
     <>
       <div className="px-4 sm:px-6 md:px-0">
         {/* Description list with inline editing */}
         <div className="mt-10">
           <div className="space-y-1">
-            <h3 className="text-lg font-medium leading-6 text-gray-900">Delete Listing</h3>
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Update Listing</h3>
           </div>
           <form action="">
             <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2 lg:grid-cols-3">
@@ -149,7 +150,6 @@ function DeleteListing() {
                         name={entry.name}
                         id={entry.title}
                         className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        placeholder={entry.placeholder}
                         aria-describedby={entry.aria}
                       />
                     </div>
@@ -157,12 +157,18 @@ function DeleteListing() {
                 )
               })}
             </div>
+            <div className='mt-6'>
+              <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+                Full Description
+              </label>
+              <textarea className='mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500' name="description" id="description" cols="20" rows="5"></textarea>
+            </div>
             <div className='mt-8'>
               <button
                 type="submit"
                 className="rounded-md border border-transparent bg-indigo-600 py-2 px-8 font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
-                Save
+                Update
               </button>
             </div>
           </form>
@@ -181,26 +187,56 @@ function Rewards() {
 }
 
 export default function Dashboard() {
+  const router = useRouter()
+  const {slug} = router.query
+
+  if (slug?.[0] === 'update') {
+    const startingSelection = {
+      new: false,
+      update: true,
+      rewards: false
+    }
+  } else if (slug?.[0] === 'rewards') {
+    const startingSelection = {
+      new: false,
+      update: false,
+      rewards: true
+    }
+  } else {
+    const startingSelection = {
+      new: true,
+      update: false,
+      rewards: false
+    }
+  }
+
+  const startingSelection = {
+    new: true,
+    update: false,
+    rewards: false
+  }
+
   const noneSelected = {
     new: false,
-    delete: false,
-    rewards: false,
+    update: false,
+    rewards: false
   }
 
   const [selected, setSelected] = useState({
-    ...noneSelected,
-    new: true
+    ...startingSelection
   })
   
   const tabs = [
     { name: 'New Listing', id: 'new', current: selected.new},
-    { name: 'Delete Listing', id: 'delete', current: selected.delete },
+    { name: 'Update Listing', id: 'update', current: selected.update },
     { name: 'Rewards', id: 'rewards', current: selected.rewards },
   ]
 
   const handleTabSelected = (e) => {
     setSelected(() => ({
-      ...noneSelected,
+      new: false,
+      update: false,
+      rewards: false,
       [e.target.id]: true
     }))
   }
@@ -240,8 +276,8 @@ export default function Dashboard() {
                 </div>
                 {selected.new
                   ? <NewListing />
-                  : selected.delete
-                    ? <DeleteListing />
+                  : selected.update
+                    ? <UpdateListing />
                     : selected.rewards
                       ? <Rewards />
                       : <NewListing />

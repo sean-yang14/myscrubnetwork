@@ -13,7 +13,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronLeftIcon, EnvelopeIcon, FunnelIcon, MagnifyingGlassIcon, PhoneIcon } from '@heroicons/react/20/solid'
-import DirectoryCard from '@/components/directory-card'
+import DirectoryCard from '@/components/jobs/directory-card'
 
 const user = {
   name: 'Tom Cook',
