@@ -1,4 +1,4 @@
-export default function MainCard({ children }) {
+export default function SettingsCard({ children }) {
 	return (
 		<div>
 			<div className='flex flex-1 flex-col md:pl-64'>

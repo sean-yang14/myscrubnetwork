@@ -9,7 +9,7 @@ import {
   ClipboardDocumentIcon
 } from '@heroicons/react/24/outline'
 import Image from 'next/image'
-import MainCard from '@/components/main-card'
+import MainCard from '@/components/settings-card'
 
 const tabs = [
   { name: 'New Listing', href: '#', current: true },

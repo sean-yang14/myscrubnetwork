@@ -1,7 +1,10 @@
 import { XMarkIcon, PencilIcon } from '@heroicons/react/20/solid';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function DirectoryCard({ job }) {
+	const router = useRouter();
+
 	return (
 		<div className='overflow-hidden bg-white border-gray-200 border-[1px] shadow sm:rounded-lg m-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-pink-500 hover:bg-gray-50'>
 			<div className='px-4 py-5 sm:px-6 flex flex-col space-y-2'>
@@ -10,13 +13,14 @@ export default function DirectoryCard({ job }) {
 						{job.title}
 					</h3>
 					<div className='flex gap-x-4'>
-						<button
-							type='button'
+						<Link
+							// type='button'
 							className='inline-flex items-center rounded-full border border-transparent bg-yellow-600 p-1 text-white shadow-sm hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2'
-							onClick={() => router.push('/admin/dashboard/:post/')}
+							// onClick={() => router.push(`admin/dashboard/update/${job.id}`)}
+							href={`admin/dashboard/update/${job.name}`}
 						>
 							<PencilIcon className='h-5 w-5' aria-hidden='true' />
-						</button>
+						</Link>
 						<button
 							type='button'
 							className='inline-flex items-center rounded-full border border-transparent bg-red-600 p-1 text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2'

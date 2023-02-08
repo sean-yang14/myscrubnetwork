@@ -18,12 +18,9 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const noCurrent = {
-    dashboard: false,
-    team: false,
-    projects: false,
-    calendar: false,
-    documents: false,
-    reports: false
+    jobs: false,
+    rewards: false,
+    settings: false,
   }
   
   const [current, setCurrent] = useState({
@@ -31,12 +28,10 @@ export default function Navbar() {
   })
 
   const navigation = [
-    { name: 'Dashboard', href: '#', icon: HomeIcon, current: current.dashboard, id: 'dashboard' },
-    { name: 'Team', href: '#', icon: UsersIcon, current: current.team, id: 'team' },
-    { name: 'Projects', href: '#', icon: FolderIcon, current: current.projects, id: 'projects' },
-    { name: 'Calendar', href: '#', icon: CalendarIcon, current: current.calendar, id: 'calendar' },
-    { name: 'Documents', href: '#', icon: InboxIcon, current: current.documents, id: 'documents' },
-    { name: 'Reports', href: '#', icon: ChartBarIcon, current: current.reports, id: 'reports' },
+    { name: 'Jobs', href: '/jobs', icon: HomeIcon, current: current.jobs, id: 'jobs' },
+    { name: 'Rewards', href: '/rewards', icon: UsersIcon, current: current.rewards, id: 'rewards' },
+    { name: 'Settings', href: '/settings', icon: FolderIcon, current: current.settings, id: 'settings' },
+    { name: 'Admin Dashboard', href: '/admin/dashboard', icon: FolderIcon, current: current.settings, id: 'admin' },
   ]
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
