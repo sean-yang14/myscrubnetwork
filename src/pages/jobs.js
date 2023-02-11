@@ -13,6 +13,7 @@ import {
 import { db } from '../../lib/firebase.config'
 import { toast } from 'react-toastify'
 import FullPost from '@/components/jobs/full-post'
+import MainLayout from '../components/main-layout'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -206,6 +207,24 @@ export default function Jobs() {
           </div>
         </div>
       </div>
+    </>
+  )
+}
+
+export async function getStaticProps(context) {
+  return {
+    props: {
+      protected: true,
+    },
+  }
+}
+
+Jobs.getLayout = function getLayout(page) {
+  return (
+    <>
+      <MainLayout >
+        {page}
+      </MainLayout>
     </>
   )
 }

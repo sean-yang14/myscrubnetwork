@@ -1,17 +1,20 @@
 import { useEffect, useState, useRef } from 'react'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import {app} from '../../lib/firebase.config'
 
 export function useAuthStatus() {
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [checkingSTatus, setCheckingStatus] = useSTate(true)
+  const [checkingStatus, setCheckingStatus] = useState(true)
+  const [user, setUser] =useState(null)
   const isMounted = useRef(true)
 
   useEffect(() => {
     if (isMounted) {
+      // MAYBE: do i need to put getApp() in getAuth()
       const auth = getAuth()
       onAuthStateChanged(auth, (user) => {
+        console.log(user)
         if (user) {
-          setLoggedIn(true)
+          setUser(user)
         }
         setCheckingStatus(false)
       })
@@ -22,5 +25,5 @@ export function useAuthStatus() {
     }
   }, [isMounted])
 
-  return {loggedIn, checkingStatus}
+  return {user, checkingStatus}
 }

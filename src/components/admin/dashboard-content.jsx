@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import MainCard from '@/components/settings-card';
+import SettingsCard from '@/components/settings-card';
 import NewListing from './new-listing';
 import UpdateListing from './update-listing';
 import Rewards from './rewards';

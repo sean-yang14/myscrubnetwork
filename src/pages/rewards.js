@@ -7,7 +7,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function Rewards() {
 
   return (
     <>
@@ -157,6 +157,24 @@ export default function Example() {
           </main>
         </div>
       </div>
+    </>
+  )
+}
+
+export async function getStaticProps(context) {
+  return {
+    props: {
+      protected: true,
+    },
+  }
+}
+
+Rewards.getLayout = function getLayout(page) {
+  return (
+    <>
+      <MainLayout >
+        {page}
+      </MainLayout>
     </>
   )
 }

@@ -522,3 +522,11 @@ export default function Example() {
     </>
   )
 }
+
+export async function getStaticProps(context) {
+  return {
+    props: {
+      protected: true,
+    },
+  }
+}

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Fragment, useState } from 'react'
+import { signOut, getAuth } from 'firebase/auth'
 import { Dialog, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
@@ -11,6 +12,7 @@ import {
   UsersIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
+import {useRouter} from 'next/router'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -21,6 +23,7 @@ export default function Navbar() {
     jobs: false,
     rewards: false,
     settings: false,
+    logout: false
   }
   
   const [current, setCurrent] = useState({
@@ -41,6 +44,14 @@ export default function Navbar() {
       ...noCurrent,
       [e.target.id]: true
     }))
+  }
+  
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    const auth = getAuth()
+    await signOut(auth)
+    router.push('/sign-in')  
   }
 
   return (
@@ -128,6 +139,25 @@ export default function Navbar() {
                           {item.name}
                         </a>
                       ))}
+                      {/* small screen logout */}
+                      <button
+                        onClick={handleLogout}
+                        className={classNames(
+                          current.logout
+                            ? 'bg-gray-100 text-gray-900'
+                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                          'group flex items-center px-2 py-2 text-base font-medium rounded-md'
+                        )}
+                      >
+                        <ChartBarIcon
+                          className={classNames(
+                            current.logout ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                            'mr-4 flex-shrink-0 h-6 w-6'
+                          )}
+                          aria-hidden="true"
+                        />
+                        Logout
+                      </button>
                     </nav>
                   </div>
                 </Dialog.Panel>
@@ -171,6 +201,25 @@ export default function Navbar() {
               </nav>
             </div>
           </div>
+          {/* medium screen logout */}
+          <button
+            onClick={handleLogout}
+            className={classNames(
+              current.logout
+                ? 'bg-gray-100 text-gray-900'
+                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+              'group flex items-center px-2 py-5 text-base font-medium rounded-md border border-gray-20'
+            )}
+          >
+            <ChartBarIcon
+              className={classNames(
+                current.logout ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                'mr-4 flex-shrink-0 h-6 w-6'
+              )}
+              aria-hidden="true"
+            />
+            Logout
+          </button>
         </div>
         <div className="flex flex-1 flex-col md:pl-64">
           <div className="sticky top-0 z-10 bg-white pl-1 pt-1 sm:pl-3 sm:pt-3 md:hidden">

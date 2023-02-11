@@ -275,3 +275,11 @@ export default function Dashboard() {
   )
 
 }
+
+export async function getStaticProps(context) {
+  return {
+    props: {
+      protected: true,
+    },
+  }
+}

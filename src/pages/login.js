@@ -1,17 +1,17 @@
 import Link from 'next/link'
+import { withPublic } from '@/login/route'
 
-
-export default function Login() {
+function Login({auth}) {
+  const {user, loginWithGoogle, error} = auth
   return (
     <>
-      <nav>
-        <ul>
-          <li>
-            <h1 className='text-2xl text-red-500'>Join Now</h1>
-          </li>
-        </ul>
-      </nav>
-      <button>Sign in with Google</button>
+      <div>
+        {error && <h1>{error}</h1>}
+        <button onClick={{loginWithGoogle}}>Google</button>
+        <h1>{user?.uid}</h1>
+      </div>
     </>
   )
 }
+
+export default withPublic(Login)
