@@ -9,9 +9,11 @@ import {
   updateProfile
 } from 'firebase/auth'
 import {setDoc, doc, serverTimestamp} from 'firebase/firestore'
-import {db} from '../../lib/firebase.config'
+import {db} from '../../../lib/firebase.config'
 import OAuth from '@/login/OAuth'
 import {FaRegEyeSlash, FaRegEye} from 'react-icons/fa'
+import cookie from 'js-cookie'
+import jwt from 'jsonwebtoken'
 
 export default function SignUp() {
   const router = useRouter()
@@ -32,7 +34,7 @@ export default function SignUp() {
     }))
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
@@ -43,7 +45,6 @@ export default function SignUp() {
         email,
         password
       )
-
       const user = userCredential.user
 
       updateProfile(auth.currentUser, {
@@ -56,7 +57,15 @@ export default function SignUp() {
 
       await setDoc(doc(db, 'users', user.uid), formDataCopy)
 
-      router.push('/')
+      // const jwt_token = jwt.sign({email, password}, process.env.NEXT_PUBLIC_JWT_SECRET_KEY)
+      // if (e.target.remember-me.checked) {
+      //   cookie.set('login_token', jwt_token, {expires: 30})
+      // } else {
+      //   cookie.set('login_token', jwt_token)
+      // }
+      // console.log('token good')
+
+      router.push('/jobs')
     } catch (error) {
       toast.error('Something went wrong with registration')
     }
@@ -70,17 +79,19 @@ export default function SignUp() {
     <>
       <div className="flex min-h-full flex-col justify-center py-8 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <div className='flex justify-center items-baseline font-bold'>
-            <h1 className='text-2xl text-indigo-500'>Scrub Network</h1>
-            <span className='text-4xl leading-[0] pl-1'>.</span>
-					</div>
-          <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-gray-900">Sign Up</h2>
+          <Link href='/'>
+            <div className='flex justify-center items-baseline font-bold'>
+              <h1 className='text-2xl text-indigo-500'>Scrub Network</h1>
+              <span className='text-4xl leading-[0] pl-1'>.</span>
+            </div>
+          </Link>
+          <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-gray-900">Sign up</h2>
         </div>
 
         <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow-xl sm:rounded-lg sm:px-10">
             <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
+              <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                   Name
                 </label>
@@ -161,7 +172,7 @@ export default function SignUp() {
                   type="submit"
                   className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
-                  Sign in
+                  Sign up
                 </button>
               </div>
             </form>

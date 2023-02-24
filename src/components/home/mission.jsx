@@ -61,9 +61,19 @@ export default function Mission() {
 					Our Mission
 				</h2>
 				<p className='mt-6 text-lg leading-8 text-gray-300'>
-					Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem
-					cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat
-					aliqua.
+					Our mission is to create a thriving community for dental professionals
+					because we believe that when you bring together highly talented people
+					with similar ambitions, amazing things happen. Scrub Network is the
+					first step in accomplishing this goal.
+				</p>
+				<p className='mt-6 text-lg leading-8 text-gray-300'>
+					Why are we willing to do what no other job site has done? Because we
+					want to prove to you that doctors are and always will be at the heart
+					of everything we do.
+				</p>
+				<p className='mt-6 text-lg leading-8 text-gray-300'>
+					We&#39;re bulding something big and would love for you to be a part of
+					it.
 				</p>
 			</div>
 		</div>

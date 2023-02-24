@@ -6,21 +6,21 @@ import {
 
 const features = [
 	{
-		name: 'Push to deploy.',
+		name: 'Sweepstakes.',
 		description:
-			'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+			'Most contributions (referrals and applying to jobs) will enter you into a sweepstakes with the chance to win prizes. Details of the current sweepstakes, along with the list of eligible contributions, can be found on the rewards tab once logged in.',
 		icon: CloudArrowUpIcon,
 	},
 	{
-		name: 'SSL certificates.',
+		name: 'Star jobs.',
 		description:
-			'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
+			"Job postings with a star icon guarantee you a reward. If you refer the doctor that gets hired, you get a $1,000 bonus. If you get hired, we will provide you with a special new hire package (we promise you'll enjoy it).",
 		icon: LockClosedIcon,
 	},
 	{
-		name: 'Database backups.',
+		name: 'Community events (coming soon).',
 		description:
-			'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+			'Key contributors to the network will be eligible to join for special events.',
 		icon: ServerIcon,
 	},
 ];
@@ -33,15 +33,15 @@ export default function FeatureRight() {
 					<div className='lg:ml-auto lg:pt-4 lg:pl-4'>
 						<div className='lg:max-w-lg'>
 							<h2 className='text-lg font-semibold leading-8 tracking-tight text-indigo-600'>
-								Deploy faster
+								Rewards
 							</h2>
 							<p className='mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
-								Get Rewarded For Your Contribution
+								Make money, win prizes
 							</p>
 							<p className='mt-6 text-lg leading-8 text-gray-600'>
-								Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-								Maiores impedit perferendis suscipit eaque, iste dolor
-								cupiditate blanditiis ratione.
+								Get rewarded for applying to jobs as you&#39;ve always done.
+								There&#39;s no catch. Plus as Scrub Network grows, so will the
+								value of the rewards.
 							</p>
 							<dl className='mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none'>
 								{features.map((feature) => (

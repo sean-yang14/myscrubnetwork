@@ -33,30 +33,21 @@ export default function FeatureLeft() {
 					<div className='lg:pr-8 lg:pt-4'>
 						<div className='lg:max-w-lg'>
 							<h2 className='text-lg font-semibold leading-8 tracking-tight text-indigo-600'>
-								Deploy faster
+								Job Posts
 							</h2>
 							<p className='mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
-								One Stop Shop for Job Listings
+								All roads end here
 							</p>
 							<p className='mt-6 text-lg leading-8 text-gray-600'>
-								Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-								Maiores impedit perferendis suscipit eaque, iste dolor
-								cupiditate blanditiis ratione.
+								Our goal is to become the only site dentists come to when
+								looking for a job. However, that&#39;s not where Scrub Network
+								is today. So, until that happens, we&#39;re offering you the
+								opportunity to get rewarded for jobs not found on our site.
+								Simply fill out an application on the Apply tab and link the
+								external job post. We&#39;ll ensure that your application is
+								sent immediately and received by the hiring practice. You can
+								even apply on the other site as well.
 							</p>
-							<dl className='mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none'>
-								{features.map((feature) => (
-									<div key={feature.name} className='relative pl-9'>
-										<dt className='inline font-semibold text-gray-900'>
-											<feature.icon
-												className='absolute top-1 left-1 h-5 w-5 text-indigo-600'
-												aria-hidden='true'
-											/>
-											{feature.name}
-										</dt>{' '}
-										<dd className='inline'>{feature.description}</dd>
-									</div>
-								))}
-							</dl>
 						</div>
 					</div>
 					<img

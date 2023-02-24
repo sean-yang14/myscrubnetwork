@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../../lib/firebase.config';
 import { toast } from 'react-toastify';
+import dynamic from 'next/dynamic';
+
+const ReactQuill = dynamic(import('react-quill'), { ssr: false });
 
 export default function NewListing({ formEntries }) {
-	const [loading, setLoading] = useState(false);
-	const [post, setPost] = useState({
+	const newEntry = {
 		title: '',
 		name: '',
 		website: '',
@@ -16,8 +18,17 @@ export default function NewListing({ formEntries }) {
 		salary: '',
 		interval: '',
 		schedule: '',
-		description: '',
-	});
+		schedule: '',
+		tier: '',
+	};
+	const [loading, setLoading] = useState(false);
+	const [post, setPost] = useState(newEntry);
+
+	const [description, setDescription] = useState('');
+
+	const handleDescriptionChange = (text) => {
+		setDescription(text);
+	};
 
 	const handleChange = (e) => {
 		setPost({
@@ -34,14 +45,17 @@ export default function NewListing({ formEntries }) {
 
 		const postCopy = {
 			...post,
+			description,
 			timestamp: serverTimestamp(),
 		};
 
 		// Delete
-		for (let i = 0; i < 10; i++) {
+		for (let i = 0; i < 3; i++) {
 			const docRef = await addDoc(collection(db, 'listings'), postCopy);
 		}
+
 		setLoading(false);
+		// setPost(newEntry);
 		toast.success('Listing Saved');
 	};
 
@@ -91,15 +105,15 @@ export default function NewListing({ formEntries }) {
 							>
 								Full Description
 							</label>
-							<textarea
-								className='mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500'
-								name='description'
+							<ReactQuill
 								id='description'
-								value={post.description}
-								onChange={handleChange}
-								cols='20'
-								rows='5'
-							></textarea>
+								name='description'
+								className='mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500'
+								theme='snow'
+								value={description}
+								onChange={handleDescriptionChange}
+								defaultValue={''}
+							/>
 						</div>
 						<div className='mt-8'>
 							<button
@@ -110,6 +124,12 @@ export default function NewListing({ formEntries }) {
 							</button>
 						</div>
 					</form>
+					{/* <div>
+						<div
+							className='prose'
+							dangerouslySetInnerHTML={{ __html: description }}
+						/>
+					</div> */}
 				</div>
 			</div>
 		</>

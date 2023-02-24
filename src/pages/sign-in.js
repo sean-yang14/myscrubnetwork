@@ -1,12 +1,12 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {toast} from 'react-toastify'
 import Link from 'next/link'
-import Image from 'next/image'
 import {useRouter} from 'next/router'
 import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
 import OAuth from '../login/OAuth'
 import {FaRegEyeSlash, FaRegEye} from 'react-icons/fa'
-
+import cookie from 'js-cookie'
+import jwt from 'jsonwebtoken'
 
 export default function SignIn() {
   const router = useRouter()
@@ -17,6 +17,21 @@ export default function SignIn() {
     password: ''
   })
   const {email, password} = formData
+
+  // useEffect(() => {
+  //   const jwt_token = cookie.get('login_token')
+  //   if (loginToken) {
+  //     try {
+  //       const payload = jwt.verify(jwt_token, process.env.NEXT_PUBLIC_JWT_SECRET_KEY);
+  //       setFormData({
+  //         email: payload.email,
+  //         password: payload.password
+  //       })
+  //     } catch (error) {
+  //       console.log(error);
+  //     }  
+  //   }    
+  // }, [])
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -37,6 +52,13 @@ export default function SignIn() {
         password
       )
 
+      // const jwt_token = jwt.sign({email, password}, process.env.NEXT_PUBLIC_JWT_SECRET_KEY)
+      // if (e.target.remember-me.checked) {
+      //   cookie.set('login_token', jwt_token, {expires: 30})
+      // } else {
+      //   cookie.set('login_token', jwt_token)
+      // }
+
       if (userCredential.user) {
         router.push('/jobs')
       }
@@ -53,11 +75,13 @@ export default function SignIn() {
     <>
       <div className="flex min-h-full flex-col justify-center py-8 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <div className='flex justify-center items-baseline font-bold'>
-            <h1 className='text-2xl text-indigo-500'>Scrub Network</h1>
-            <span className='text-4xl leading-[0] pl-1'>.</span>
-					</div>
-          <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-gray-900">Sign In</h2>
+          <Link href='/'>
+            <div className='flex justify-center items-baseline font-bold'>
+              <h1 className='text-2xl text-indigo-500'>Scrub Network</h1>
+              <span className='text-4xl leading-[0] pl-1'>.</span>
+            </div>
+          </Link>
+          <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-gray-900">Sign in</h2>
         </div>
 
         <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-md">

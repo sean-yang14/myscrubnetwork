@@ -5,6 +5,7 @@ import {UserContext} from '../login/user'
 import { useEffect, useState, useRef } from 'react'
 import {useRouter} from 'next/router'
 import {app} from '../../lib/firebase.config'
+import '../../node_modules/react-quill/dist/quill.snow.css'
 
 export default function App({ Component, pageProps }) {
   const router = useRouter()

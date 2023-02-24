@@ -11,13 +11,6 @@ async function logout() {
 
 
 export default function Logout() {
-  
-  useEffect(() => {
-    // const auth = getAuth(app)
-    const auth = getAuth()
-    console.log(auth)
-  }, [])
-
   return (
     <button className='border-2 border-red-500 w-full' onClick={logout}>Logout</button>
   )

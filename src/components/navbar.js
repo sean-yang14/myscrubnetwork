@@ -4,13 +4,15 @@ import { signOut, getAuth } from 'firebase/auth'
 import { Dialog, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
-  CalendarIcon,
+  TrophyIcon,
   ChartBarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  UsersIcon,
+  PhoneIcon,
+  KeyIcon,
+  Cog6ToothIcon,
+  BriefcaseIcon,
   XMarkIcon,
+  ArrowRightOnRectangleIcon,
+  PaperAirplaneIcon,
 } from '@heroicons/react/24/outline'
 import {useRouter} from 'next/router'
 
@@ -21,9 +23,12 @@ function classNames(...classes) {
 export default function Navbar() {
   const noCurrent = {
     jobs: false,
+    apply: false,
     rewards: false,
     settings: false,
-    logout: false
+    contact: false,
+    admin: false,
+    logout: false,
   }
   
   const [current, setCurrent] = useState({
@@ -31,24 +36,30 @@ export default function Navbar() {
   })
 
   const navigation = [
-    { name: 'Jobs', href: '/jobs', icon: HomeIcon, current: current.jobs, id: 'jobs' },
-    { name: 'Rewards', href: '/rewards', icon: UsersIcon, current: current.rewards, id: 'rewards' },
-    { name: 'Settings', href: '/settings', icon: FolderIcon, current: current.settings, id: 'settings' },
-    { name: 'Admin Dashboard', href: '/admin/dashboard', icon: FolderIcon, current: current.settings, id: 'admin' },
+    { name: 'Jobs', href: '/jobs', icon: BriefcaseIcon, current: current.jobs, id: 'jobs' },
+    { name: 'Apply', href: '/apply', icon: PaperAirplaneIcon, current: current.apply, id: 'apply' },
+    { name: 'Rewards', href: '/rewards', icon: TrophyIcon, current: current.rewards, id: 'rewards' },
+    { name: 'Settings', href: '/settings', icon: Cog6ToothIcon, current: current.settings, id: 'settings' },
+    { name: 'Contact Us', href: '/contact-us', icon: PhoneIcon, current: current.contact, id: 'contact' },
+    { name: 'Admin Dashboard', href: '/admin/dashboard', icon: KeyIcon, current: current.admin, id: 'admin' },
   ]
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const handleClick = (e) => {
-    setCurrent(() => ({
+    setCurrent({
       ...noCurrent,
       [e.target.id]: true
-    }))
+    })
   }
   
   const router = useRouter()
 
-  const handleLogout = async () => {
+  const handleLogout = async (e) => {
+    setCurrent({
+      ...noCurrent,
+      [e.target.id]: true
+    })
     const auth = getAuth()
     await signOut(auth)
     router.push('/sign-in')  
@@ -56,17 +67,9 @@ export default function Navbar() {
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full">
-        <body class="h-full">
-        ```
-      */}
       <div>
         <Transition.Root show={sidebarOpen} as={Fragment}>
-          <Dialog as="div" className="relative z-40 md:hidden" onClose={setSidebarOpen}>
+          <Dialog as="div" className="relative z-40 lg:hidden" onClose={setSidebarOpen}>
             <Transition.Child
               as={Fragment}
               enter="transition-opacity ease-linear duration-300"
@@ -111,10 +114,12 @@ export default function Navbar() {
                     </div>
                   </Transition.Child>
                   <div className="h-0 flex-1 overflow-y-auto pt-5 pb-4">
-                    <div className="flex flex-shrink-0 items-center px-4">
-                      <h1 className='text-xl text-indigo-500 font-bold'>Scrub Network</h1>
-                      <span className='text-2xl font-bold leading-[0] pl-1'>.</span>
-                    </div>
+                    <Link href='/jobs'>
+                      <div className="flex flex-shrink-0 items-center px-4">
+                        <h1 className='text-xl text-indigo-500 font-bold'>Scrub Network</h1>
+                        <span className='text-2xl font-bold leading-[0] pl-1'>.</span>
+                      </div>
+                    </Link>
                     <nav className="mt-5 space-y-1 px-2">
                       {navigation.map((item) => (
                         <a
@@ -124,7 +129,7 @@ export default function Navbar() {
                           href={item.href}
                           className={classNames(
                             item.current
-                              ? 'bg-gray-100 text-gray-900'
+                              ? 'bg-indigo-100 text-gray-900'
                               : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                             'group flex items-center px-2 py-2 text-base font-medium rounded-md'
                           )}
@@ -144,12 +149,12 @@ export default function Navbar() {
                         onClick={handleLogout}
                         className={classNames(
                           current.logout
-                            ? 'bg-gray-100 text-gray-900'
+                            ? 'bg-indigo-100 text-gray-900'
                             : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                           'group flex items-center px-2 py-2 text-base font-medium rounded-md'
                         )}
                       >
-                        <ChartBarIcon
+                        <ArrowRightOnRectangleIcon
                           className={classNames(
                             current.logout ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
                             'mr-4 flex-shrink-0 h-6 w-6'
@@ -168,23 +173,25 @@ export default function Navbar() {
         </Transition.Root>
 
         {/* Static sidebar for desktop */}
-        <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
+        <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-white">
             <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
-              <div className="flex flex-shrink-0 items-center px-4">
-                <h1 className='text-xl text-indigo-500 font-bold'>Scrub Network</h1>
-                <span className='text-2xl font-bold leading-[0] pl-1'>.</span>
-              </div>
+              <Link href='/jobs'>
+                <div className="flex flex-shrink-0 items-center px-4">
+                  <h1 className='text-xl text-indigo-500 font-bold'>Scrub Network</h1>
+                  <span className='text-2xl font-bold leading-[0] pl-1'>.</span>
+                </div>
+              </Link>
               <nav className="mt-5 flex-1 space-y-1 bg-white px-2">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     id={item.id}
                     key={item.name}
                     onClick={handleClick}
                     href={item.href}
                     className={classNames(
-                      item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                      item.current ? 'bg-indigo-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                       'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
                     )}
                   >
@@ -196,7 +203,7 @@ export default function Navbar() {
                       aria-hidden="true"
                     />
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </nav>
             </div>
@@ -206,12 +213,12 @@ export default function Navbar() {
             onClick={handleLogout}
             className={classNames(
               current.logout
-                ? 'bg-gray-100 text-gray-900'
+                ? 'bg-indigo-100 text-gray-900'
                 : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
               'group flex items-center px-2 py-5 text-base font-medium rounded-md border border-gray-20'
             )}
           >
-            <ChartBarIcon
+            <ArrowRightOnRectangleIcon
               className={classNames(
                 current.logout ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
                 'mr-4 flex-shrink-0 h-6 w-6'
@@ -221,8 +228,8 @@ export default function Navbar() {
             Logout
           </button>
         </div>
-        <div className="flex flex-1 flex-col md:pl-64">
-          <div className="sticky top-0 z-10 bg-white pl-1 pt-1 sm:pl-3 sm:pt-3 md:hidden">
+        <div className="flex flex-1 flex-col lg:pl-64">
+          <div className="sticky top-0 z-10 bg-white pl-1 pt-1 sm:pl-3 sm:pt-3 lg:hidden">
             <button
               type="button"
               className="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"

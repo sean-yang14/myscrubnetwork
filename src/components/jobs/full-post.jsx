@@ -1,10 +1,38 @@
-export default function FullPost({ selectedJob }) {
+import { XMarkIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
+import Badges from './badges';
+import Image from 'next/image';
+
+function classNames(...classes) {
+	return classes.filter(Boolean).join(' ');
+}
+
+export default function FullPost({ selectedJob, screen, handleClick }) {
 	return (
-		<article className='overflow-y-auto sticky top-0 h-screen hidden border-r border-gray-200 md:order-last md:flex md:flex-col'>
+		<article
+			className={classNames(
+				screen === 'mobile'
+					? 'block'
+					: 'hidden md:px-2 lg:px-4 xl:px-8 md:order-last md:flex md:flex-col',
+				'overflow-y-auto sticky top-0 h-screen relative'
+			)}
+		>
 			{/* Profile header */}
 			<div>
+				{screen === 'mobile' && (
+					<div className='absolute top-0 right-0'>
+						<button
+							type='button'
+							className='inline-flex items-center rounded-full border border-transparent p-1 text-gray-600 shadow-sm hover:bg-gray-900'
+							onClick={handleClick}
+						>
+							<span className='sr-only'>Close sidebar</span>
+							<XMarkIcon className='h-6 w-6' aria-hidden='true' />
+						</button>
+					</div>
+				)}
 				<div className='mx-auto max-w-5xl px-4 sm:px-6 lg:px-8'>
-					{selectedJob?.profileImage && (
+					{/* {selectedJob?.profileImage && (
 						<div className='mt-6 sm:flex sm:items-end sm:space-x-5'>
 							<div className='flex'>
 								<img
@@ -14,26 +42,48 @@ export default function FullPost({ selectedJob }) {
 								/>
 							</div>
 						</div>
-					)}
-					<div className='mt-8 hidden min-w-0 flex-1 sm:block 2xl:hidden'>
-						<h1 className='truncate text-2xl font-bold text-gray-900'>
-							{selectedJob?.title}
-						</h1>
-						<h2 className='text-gray-500 font-medium text-xl'>
+					)} */}
+					<div className='mt-8 min-w-0 flex-1 block'>
+						<Badges tier={selectedJob?.tier} />
+						<div className='flex items-center'>
+							<h1 className='truncate text-2xl font-bold text-gray-900'>
+								{selectedJob?.title}
+							</h1>
+							{selectedJob?.tier !== '3' && (
+								<Image
+									src='/star.png'
+									alt='star icon'
+									width={15}
+									height={15}
+									className='ml-2'
+								/>
+							)}
+						</div>
+						<h2 className='text-gray-500 font-medium text-xl mt-4'>
 							{selectedJob?.name}
 						</h2>
-						<div>
-							<span>icon</span>
+						{selectedJob?.website && (
+							<a
+								href={selectedJob.website}
+								target='_blank'
+								className='text font-medium text-indigo-600 hover:text-indigo-500'
+								rel='noopener noreferrer'
+							>
+								Website
+							</a>
+						)}
+						<div className='flex gap-x-2 mt-2'>
+							<MapPinIcon className='h-6 w-6' />
 							<p className='ml-2 inline text-gray-500 font-medium'>
 								{`${selectedJob?.address}, ${selectedJob?.city}, ${selectedJob?.state}, ${selectedJob?.zip}`}
 							</p>
 						</div>
-						<button
-							type='button'
-							className='inline-flex justify-center rounded-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2'
+						<Link
+							href='/jobs/apply'
+							className='mt-4 inline-flex justify-center rounded-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
 						>
 							<span>Apply</span>
-						</button>
+						</Link>
 					</div>
 				</div>
 			</div>
@@ -65,7 +115,13 @@ export default function FullPost({ selectedJob }) {
 						<dt className='text-lg font-medium text-gray-500'>
 							Full Job Description
 						</dt>
-						<dd className='mt-1 text-gray-900 '>{selectedJob?.description}</dd>
+						<dd className='mt-1 text-gray-900 '>
+							<div
+								className='prose'
+								dangerouslySetInnerHTML={{ __html: selectedJob?.description }}
+							/>
+						</dd>
+						{/* <dd className='mt-1 text-gray-900 '>{selectedJob?.description}</dd> */}
 					</div>
 				</dl>
 			</div>

@@ -2,12 +2,14 @@ import {useState} from 'react'
 import Link from 'next/link'
 import {getAuth, sendPasswordResetEmail} from 'firebase/auth'
 import {toast} from 'react-toastify'
+import {useRouter} from 'next/router'
 
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('')
 
   const handleChange = (e) => setEmail(e.target.value)
+  const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -16,6 +18,7 @@ export default function ForgotPassword() {
       const auth = getAuth()
       await sendPasswordResetEmail(auth, email)
       toast.success('Email was sent')
+      router.push('/sign-in')
     } catch (error) {
       toast.error('Could not send reset email')
     }

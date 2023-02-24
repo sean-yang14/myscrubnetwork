@@ -74,7 +74,7 @@ const formEntries = [
 		type: 'text',
 		name: 'interval',
 		id: 'interval',
-		placeholder: 'Year',
+		placeholder: 'year',
 	},
 	{
 		label: 'Schedule',
@@ -83,6 +83,13 @@ const formEntries = [
 		id: 'schedule',
 		placeholder: 'Full Time',
 		aria: 'dentist schedule',
+	},
+	{
+		label: 'Tier',
+		type: 'number',
+		name: 'tier',
+		id: 'tier',
+		placeholder: '1, 2, or 3',
 	},
 	// {label: 'Phone Number', type: 'text', name: 'phone', id: 'phone', placeholder: '847-313-0000', aria: 'practice phone number'},
 	// {label: 'Email', type: 'email', name: 'email', id: 'email', placeholder: 'info@scrubnetwork.com', aria: 'practice email'},
