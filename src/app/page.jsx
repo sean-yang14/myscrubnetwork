@@ -1,7 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
 import Hero from '@/components/home/hero';
 import FeatureLeft from '@/components/home/feature-left';
 import FeatureRight from '@/components/home/feature-right';

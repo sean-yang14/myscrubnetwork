@@ -1,7 +1,7 @@
 const prizes = {
-	1: ['$1,000 Referral Bonus', 'Mega Sweepstakes'],
+	1: ['$1,000 referral Bonus', 'Mega Sweepstakes'],
 
-	2: ['Sweepstakes', 'Token Bonuses'],
+	2: ['$250 referral bonus', 'Sweepstakes', '2x'],
 
 	3: ['Sweepstakes'],
 };

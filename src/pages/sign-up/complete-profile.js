@@ -61,6 +61,14 @@ export default function CompleteProfile() {
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Complete Profile</h2>
         </div>
+        <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+          <button
+            type="button"
+            className="block rounded-md bg-indigo-600 py-1.5 px-3 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Add user
+          </button>
+        </div>
         <form onSubmit={handleSubmit} className="mx-auto mt-8 max-w-xl sm:mt-14">
           <div className="grid grid-cols-1 gap-y-6 gap-x-8 sm:grid-cols-2">
             <div className="sm:col-span-2">

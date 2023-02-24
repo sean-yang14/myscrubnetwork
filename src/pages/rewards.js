@@ -4,7 +4,8 @@ import {
 import Image from 'next/image'
 import MainLayout from '../components/main-layout'
 import MainCard from '@/components/settings-card'
-import Table from '@/components/table'
+import RewardsTable from '@/components/rewards-table'
+import { getAuth } from 'firebase/auth'
 
 const people = [
   { name: 'Lindsay Walton', title: 'Front-end Developer', email: 'lindsay.walton@example.com', role: 'Member' },
@@ -16,21 +17,22 @@ function classNames(...classes) {
 }
 
 export default function Rewards() {
+  const auth = getAuth()
 
   return (
     <>
       <MainCard>        
         <main className="flex-1">
-          <div className="py-6">
-            <div>
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-                <h1 className="text-3xl font-semibold text-gray-900">Rewards</h1>
-                <p className="font-medium text-gray-600">Welcome back, Sean</p>
+          <div className="relative mx-auto max-w-4xl md:px-8 xl:px-0">
+            <div className="pt-10 pb-16">
+              <div className="px-4 sm:px-6 md:px-0">
+                <h1 className="text-3xl font-bold tracking-tight text-gray-900">Rewards</h1>
+                <p className="font-medium text-gray-600 text-xl">Welcome back <span className='text-indigo-600'>{auth.currentUser.displayName}</span>!</p>
               </div>
               {/* Referral code */}
-              <div className='mt-8 px-4 sm:px-6 md:px-8'>
+              <div className="mt-4 md:mt-8 px-4 sm:px-6 md:px-0">
                 <div className="block text-xl font-medium">
-                  Referral Code
+                  Referral email
                 </div>
                 <div className="mt-1 flex rounded-md shadow-sm lg:w-1/2">
                   <div className="relative flex flex-grow items-stretch focus-within:z-10">
@@ -38,7 +40,7 @@ export default function Rewards() {
                       id='referralCode'
                       className="block border-black border-[1px] w-full rounded-none rounded-l-md pl-4 focus:border-indigo-500 focus:ring-indigo-500 text-lg flex items-center"
                     >
-                      RK-6SA-KE
+                      {auth.currentUser.email}
                     </div>
                   </div>
                   <button
@@ -51,10 +53,10 @@ export default function Rewards() {
                   </button>
                 </div>
               </div>
+              {/* Rewarded Actions */}
+              <RewardsTable />
             </div>
           </div>
-          {/* Rewarded Actions */}
-          <Table />
           <div className="py-6">
             {/* Rewards game */}
             <div className="bg-white border-2 border-red-500">
