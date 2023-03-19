@@ -1,53 +1,47 @@
-import {
-	CloudArrowUpIcon,
-	LockClosedIcon,
-	ServerIcon,
-} from '@heroicons/react/20/solid';
+import { DocumentTextIcon, HandThumbUpIcon } from '@heroicons/react/20/solid';
 
 const features = [
 	{
-		name: 'Push to deploy.',
+		name: 'Details that matter to you.',
 		description:
-			'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-		icon: CloudArrowUpIcon,
+			'Unlike other job boards that take a one size fits all approach for every career path, we are solely focused on creating a product that works perfectly for dentists.',
+		icon: DocumentTextIcon,
 	},
 	{
-		name: 'SSL certificates.',
+		name: 'One place for all the jobs.',
 		description:
-			'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
-		icon: LockClosedIcon,
-	},
-	{
-		name: 'Database backups.',
-		description:
-			'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
-		icon: ServerIcon,
+			"Our goal is to have all open dentist positions listed on our website to optimize your job searching experience. We are working towards that goal. In the meantime, you can still get rewarded for external job posts. Simply fill out the application found on our Apply page (see picture) and we'll handle it from there.",
+		icon: HandThumbUpIcon,
 	},
 ];
 
 export default function FeatureLeft() {
 	return (
-		<div className='overflow-hidden bg-white py-24 sm:py-32'>
+		<div className='overflow-hidden bg-white py-20 sm:py-24'>
 			<div className='mx-auto max-w-7xl px-6 lg:px-8'>
 				<div className='mx-auto grid max-w-2xl grid-cols-1 gap-y-16 gap-x-8 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2'>
 					<div className='lg:pr-8 lg:pt-4'>
 						<div className='lg:max-w-lg'>
-							<h2 className='text-lg font-semibold leading-8 tracking-tight text-indigo-600'>
-								Job Posts
+							<h2 className='text-4xl font-bold leading-7 text-indigo-600'>
+								A job board made
 							</h2>
-							<p className='mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
-								All roads end here
+							<p className='mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
+								for dentists by dentists
 							</p>
-							<p className='mt-6 text-lg leading-8 text-gray-600'>
-								Our goal is to become the only site dentists come to when
-								looking for a job. However, that&#39;s not where Scrub Network
-								is today. So, until that happens, we&#39;re offering you the
-								opportunity to get rewarded for jobs not found on our site.
-								Simply fill out an application on the Apply tab and link the
-								external job post. We&#39;ll ensure that your application is
-								sent immediately and received by the hiring practice. You can
-								even apply on the other site as well.
-							</p>
+							<dl className='mt-10 max-w-xl space-y-8 text-lg leading-7 text-gray-600 lg:max-w-none'>
+								{features.map((feature) => (
+									<div key={feature.name} className='relative pl-9'>
+										<dt className='inline font-semibold text-gray-900'>
+											<feature.icon
+												className='absolute top-1 left-1 h-6 w-6 text-indigo-600'
+												aria-hidden='true'
+											/>
+											{feature.name}
+										</dt>{' '}
+										<dd className='inline'>{feature.description}</dd>
+									</div>
+								))}
+							</dl>
 						</div>
 					</div>
 					<img

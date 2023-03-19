@@ -83,22 +83,13 @@ const formEntries = [
 		placeholder: 'Full Time',
 		aria: 'dentist schedule',
 	},
-	{
-		label: 'Tier',
-		type: 'number',
-		name: 'tier',
-		id: 'tier',
-		placeholder: '1, 2, or 3',
-	},
-	// {label: 'Phone Number', type: 'text', name: 'phone', id: 'phone', placeholder: '847-313-0000', aria: 'practice phone number'},
-	// {label: 'Email', type: 'email', name: 'email', id: 'email', placeholder: 'info@scrubnetwork.com', aria: 'practice email'},
 ];
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ');
 }
 
-export default function DashboardContent({ startObj, children }) {
+export default function DashboardContent({ startObj, children, id }) {
 	const [selected, setSelected] = useState({
 		...startObj,
 	});
@@ -106,14 +97,14 @@ export default function DashboardContent({ startObj, children }) {
 	const tabs = [
 		{ name: 'New Listing', id: 'new', current: selected.new },
 		{ name: 'Update Listing', id: 'update', current: selected.update },
-		{ name: 'Rewards', id: 'rewards', current: selected.rewards },
+		{ name: 'Users', id: 'users', current: selected.users },
 	];
 
 	const handleTabSelected = (e) => {
 		setSelected(() => ({
 			new: false,
 			update: false,
-			rewards: false,
+			users: false,
 			[e.target.id]: true,
 		}));
 	};
@@ -121,7 +112,7 @@ export default function DashboardContent({ startObj, children }) {
 	return (
 		<>
 			<main className='flex-1'>
-				<div className='relative mx-auto max-w-4xl md:px-8 xl:px-0'>
+				<div className='relative mx-auto max-w-5xl md:px-8 xl:px-0'>
 					<div className='pt-10 pb-16'>
 						<div className='px-4 sm:px-6 md:px-0'>
 							<h1 className='text-3xl font-bold tracking-tight text-gray-900'>
@@ -132,7 +123,7 @@ export default function DashboardContent({ startObj, children }) {
 							{/* Tabs */}
 							<div className='block'>
 								<div className='border-b border-gray-200'>
-									<nav className='-mb-px flex space-x-8'>
+									<nav className='px-4 sm:px-6 md:px-0 -mb-px flex space-x-8'>
 										{tabs.map((tab) => (
 											<a
 												key={tab.name}
@@ -154,8 +145,8 @@ export default function DashboardContent({ startObj, children }) {
 							{selected.new ? (
 								<NewListing formEntries={formEntries} />
 							) : selected.update ? (
-								<UpdateListing formEntries={formEntries} />
-							) : selected.rewards ? (
+								<UpdateListing formEntries={formEntries} id={id} />
+							) : selected.users ? (
 								<Rewards formEntries={formEntries} />
 							) : (
 								<NewListing formEntries={formEntries} />

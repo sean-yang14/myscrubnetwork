@@ -1,15 +1,56 @@
-import { useState } from 'react';
-import dynamic from 'next/dynamic';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import {
+	addDoc,
+	collection,
+	serverTimestamp,
+	doc,
+	getDoc,
+} from 'firebase/firestore';
+import { db } from '../../../lib/firebase.config';
+import { toast } from 'react-toastify';
+import ListingDetails from './listing-details';
 
-// MAKE THIS A COMPONENT FOR NEW LISTING AND UPDATE LISTING
-
-const ReactQuill = dynamic(import('react-quill'), { ssr: false });
-
-export default function UpdateListing({ formEntries }) {
+export default function NewListing({ formEntries, id }) {
 	const [loading, setLoading] = useState(false);
-	const [post, setPost] = useState(newEntry);
-
+	const [post, setPost] = useState({
+		title: '',
+		name: '',
+		website: '',
+		address: '',
+		city: '',
+		state: '',
+		zip: '',
+		salary: '',
+		interval: '',
+		schedule: '',
+		schedule: '',
+		tier: '',
+		specialty: '',
+		type: '',
+	});
 	const [description, setDescription] = useState('');
+
+	// On load, pull post data from server
+	useEffect(() => {
+		const fetchPostData = async () => {
+			try {
+				const listingRef = doc(db, 'listings', id);
+				const queryDoc = await getDoc(listingRef);
+				setPost({
+					...queryDoc.data(),
+					id: queryDoc.id,
+				});
+				setDescription(queryDoc.data().description);
+				delete post.description;
+			} catch (error) {
+				console.log(error);
+				toast.error('Could not retrieve post info');
+			}
+		};
+
+		fetchPostData();
+	}, []);
 
 	const handleDescriptionChange = (text) => {
 		setDescription(text);
@@ -18,7 +59,7 @@ export default function UpdateListing({ formEntries }) {
 	const handleChange = (e) => {
 		setPost({
 			...post,
-			[e.target.id]: e.target.value,
+			[e.target?.id]: e.target?.value,
 		});
 	};
 
@@ -31,89 +72,26 @@ export default function UpdateListing({ formEntries }) {
 		const postCopy = {
 			...post,
 			description,
-			timestamp: serverTimestamp(),
+			updated_timestamp: serverTimestamp(),
 		};
 
-		// Delete
 		const docRef = await addDoc(collection(db, 'listings'), postCopy);
 
 		setLoading(false);
-		toast.success('Listing Updated');
+		router.push('/jobs');
 	};
 
 	return (
 		<>
-			<div className='px-4 sm:px-6 md:px-0'>
-				{/* Description list with inline editing */}
-				<div className='mt-10'>
-					<div className='space-y-1'>
-						<h3 className='text-lg font-medium leading-6 text-gray-900'>
-							Update Listing
-						</h3>
-					</div>
-					<form onSubmit={handleSubmit}>
-						<div className='mt-6 grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2 lg:grid-cols-3'>
-							{formEntries.map((entry, i) => {
-								return (
-									<div key={i}>
-										<div className='flex justify-between'>
-											<label
-												htmlFor='title'
-												className='block text-sm font-medium text-gray-700'
-											>
-												{entry.label}
-											</label>
-										</div>
-										<div className='mt-1'>
-											<input
-												onChange={handleChange}
-												type={entry.type}
-												name={entry.name}
-												id={entry.title}
-												value={post[entry.id]}
-												className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-												aria-describedby={entry.aria}
-											/>
-										</div>
-									</div>
-								);
-							})}
-						</div>
-						<div className='mt-6'>
-							<label
-								htmlFor='description'
-								className='block text-sm font-medium text-gray-700'
-							>
-								Full Description
-							</label>
-							<ReactQuill
-								id='description'
-								name='description'
-								className='mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500'
-								theme='snow'
-								value={entry.description}
-								onChange={handleDescriptionChange}
-								defaultValue={''}
-							/>
-							{/* <textarea
-								className='mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500'
-								name='description'
-								id='description'
-								cols='20'
-								rows='5'
-							></textarea> */}
-						</div>
-						<div className='mt-8'>
-							<button
-								type='submit'
-								className='rounded-md border border-transparent bg-indigo-600 py-2 px-8 font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
-							>
-								Update
-							</button>
-						</div>
-					</form>
-				</div>
-			</div>
+			<ListingDetails
+				post={post}
+				formEntries={formEntries}
+				handleSubmit={handleSubmit}
+				handleChange={handleChange}
+				description={description}
+				handleDescriptionChange={handleDescriptionChange}
+				loading={loading}
+			/>
 		</>
 	);
 }

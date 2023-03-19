@@ -1,6 +1,6 @@
-import MainCard from '@/components/settings-card'
-import MainLayout from '@/components/main-layout'
-import Application from '@/components/application'
+import MainCard from '@/components/layout/main-card'
+import MainLayout from '@/components/layout/main-layout'
+import Application from '@/components/jobs/application'
 
 export default function Apply() {
   return (

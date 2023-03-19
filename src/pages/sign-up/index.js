@@ -19,6 +19,7 @@ export default function SignUp() {
   const router = useRouter()
 
   const [showPassword, setShowPassword] = useState(false)
+  const [validation, setValidation] = useState(null)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -28,6 +29,7 @@ export default function SignUp() {
   const {name, email, password} = formData
 
   const handleChange = (e) => {
+    setValidation(false)
     setFormData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.value
@@ -37,6 +39,11 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    if (password.length < 6) {
+      setValidation(true)
+      return 
+    }
+
     try {
       const auth = getAuth()
 
@@ -45,6 +52,7 @@ export default function SignUp() {
         email,
         password
       )
+
       const user = userCredential.user
 
       updateProfile(auth.currentUser, {
@@ -65,8 +73,9 @@ export default function SignUp() {
       // }
       // console.log('token good')
 
-      router.push('/jobs')
+      router.push('/sign-up/complete-profile')
     } catch (error) {
+      console.log(error)
       toast.error('Something went wrong with registration')
     }
   }
@@ -85,7 +94,7 @@ export default function SignUp() {
               <span className='text-4xl leading-[0] pl-1'>.</span>
             </div>
           </Link>
-          <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-gray-900">Sign up</h2>
+          <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-gray-900">Sign Up</h2>
         </div>
 
         <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
@@ -145,9 +154,10 @@ export default function SignUp() {
                     }
                   </div> 
                 </div>
+                {validation && <p className='mt-2 text-sm text-red-500'>Password must be at least 6 characters long</p>}
               </div>
 
-              <div className="flex items-center justify-between">
+              {/* <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <input
                     id="remember-me"
@@ -165,7 +175,7 @@ export default function SignUp() {
                     Forgot your password?
                   </Link>
                 </div>
-              </div>
+              </div> */}
 
               <div>
                 <button
@@ -183,7 +193,7 @@ export default function SignUp() {
                   <div className="w-full border-t border-gray-300" />
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="bg-white px-2 text-gray-500">Or continue with</span>
+                  <span className="bg-white px-2 text-gray-500">or continue with</span>
                 </div>
               </div>
 

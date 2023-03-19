@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import FullPost from '@/components/jobs/full-post';
 
@@ -32,7 +32,7 @@ export default function ModalJob({ selectedJob, open, setOpen, handleClick }) {
 							leaveTo='opacity-0 translate-y-4 translate-y-0 scale-95'
 						>
 							{/* Content */}
-							<Dialog.Panel className='relative transform rounded-lg bg-white px-4 pt-5 pb-4 shadow-xl transition-all m-8 w-full max-w-md'>
+							<Dialog.Panel className='relative transform rounded-lg bg-white pt-5 pb-4 shadow-xl transition-all m-8 w-full max-w-md'>
 								<FullPost
 									screen='mobile'
 									handleClick={handleClick}

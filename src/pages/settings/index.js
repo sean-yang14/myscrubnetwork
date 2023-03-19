@@ -1,31 +1,18 @@
 import { useState, useEffect, Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import { getAuth, updateProfile } from 'firebase/auth'
 import {
   updateDoc,
   doc,
-  collection,
   getDoc,
-  query,
-  where,
-  orderBy,
-  deleteDoc,
 } from 'firebase/firestore'
 import { db } from '../../../lib/firebase.config'
 import { toast } from 'react-toastify'
-import { Switch} from '@headlessui/react'
-import {
-  Bars3BottomLeftIcon,
-  BellIcon,
-} from '@heroicons/react/24/outline'
-import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
-import { ClipboardDocumentIcon, ExclamationTriangleIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import Image from 'next/image'
-import MainCard from '@/components/settings-card'
-import MainLayout from '@/components/main-layout'
+import { ExclamationTriangleIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import MainCard from '@/components/layout/main-card'
+import MainLayout from '@/components/layout/main-layout'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -88,6 +75,7 @@ function BinaryAnswerInput({label, value, handleChange, handleSubmit, handleCanc
             value={value}
             className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           >
+            <option value="">-- Select Y / N -- </option>
             <option value='Yes'>Yes</option>
             <option value='No'>No</option>
           </select>
@@ -117,7 +105,7 @@ function BinaryAnswerInput({label, value, handleChange, handleSubmit, handleCanc
 }
 
 function SelectInput({label, value, handleChange, handleSubmit, handleCancel}) {
-  return (
+  return ( 
     <div className='sm:col-span-2 '>
       <form onSubmit={handleSubmit} className='flex justify-between'>
         <div className='w-56'>
@@ -128,10 +116,12 @@ function SelectInput({label, value, handleChange, handleSubmit, handleCancel}) {
             name={label}
             id={label}
             onChange={handleChange}
+            value={value}
             className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           >
-            <option value='endodontist'>Endodontist</option>
+            <option value="">-- Select Specialty -- </option>
             <option value='general'>General</option>
+            <option value='endodontist'>Endodontist</option>
             <option value='orthodontist'>Orthodontist</option>
             <option value='periodontist'>Periodontist</option>
             <option value='Prosthodontist'>Prosthodontist</option>
@@ -166,7 +156,7 @@ function SelectInput({label, value, handleChange, handleSubmit, handleCancel}) {
 export default function Settings() {
   const [open, setOpen] = useState(false)
   const auth = getAuth()
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
   const [updating, setUpdating] = useState({
     name: false,
     email: false,
@@ -175,8 +165,6 @@ export default function Settings() {
     owner: false,
     seeking_job: false,
   })
-  const [updated, setUpdated] = useState(false)
-  const [changeDetails, setChangeDetails] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -186,13 +174,10 @@ export default function Settings() {
     seeking_job: '', 
   })
 
-  const router = useRouter()
-
   // Section: On load, pull user data from server
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-  
           const userRef = doc(db, 'users', auth.currentUser.uid)
           const queryDoc = await getDoc(userRef)
           setFormData({
@@ -207,8 +192,6 @@ export default function Settings() {
 
     fetchUserData()
   }, [])
-
-  // Check if you need updated as dependency
 
   const { name, email, specialty, other_specialty, owner, seeking_job } = formData
 
@@ -245,13 +228,12 @@ export default function Settings() {
   // Submit updates to server
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(seeking_job)
     const userRef = doc(db, 'users', auth.currentUser.uid)
 
     try {
       // Update name if changed
       if (auth.currentUser.displayName !== name) {
-        // Update display name in fb
+        // Update display name in firebase
         await updateProfile(auth.currentUser, {
           displayName: name,
         })
@@ -300,8 +282,6 @@ export default function Settings() {
           ...prev,
           seeking_job: false
         }))
-
-        console.log(seeking_job)
       }
 
       // Update practice owner if changed
@@ -338,15 +318,15 @@ export default function Settings() {
     <>
       <MainCard>
         <main className="flex-1">
-          <div className="relative mx-auto max-w-4xl md:px-8 xl:px-0">
+          <div className="relative mx-auto max-w-5xl md:px-8 xl:px-0">
             <div className="pt-10 pb-16">
               <div className="px-4 sm:px-6 md:px-0">
                 <h1 className="text-3xl font-bold tracking-tight text-gray-900">Settings</h1>
               </div>
               <div className="px-4 sm:px-6 md:px-0">
-                <div className="py-6">
+                <div className="py-4">
                   {/* Description list with inline editing */}
-                  <div className="mt-10 divide-y divide-gray-200">
+                  <div className="mt-6 divide-y divide-gray-200">
                     <div className="space-y-1">
                       <h3 className="text-lg font-medium leading-6 text-gray-900">Profile</h3>
                     </div>
@@ -359,7 +339,7 @@ export default function Settings() {
                           }
                           {!updating.name &&
                             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            <span className="flex-grow">{name}</span>
+                              <span className="flex-grow">{name}</span>
                               <span className="ml-4 flex-shrink-0">
                                 <button
                                   name='name'
@@ -476,20 +456,20 @@ export default function Settings() {
                     </div>
                   </div>
 
-                  <div className="mt-10 divide-y divide-gray-200">
+                  <div className="mt-6 divide-y divide-gray-200">
                     <div className="space-y-1">
                       <h3 className="text-lg font-medium leading-6 text-gray-900">Account</h3>
                     </div>
                     <div className="mt-6">
                       <dl className="divide-y divide-gray-200">
-                        <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                        <div className="py-4 grid grid-cols-3 sm:gap-4 sm:py-5">
                           <dt className="text-sm font-medium text-gray-500">Delete account</dt>
-                          <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                          <dd className="mt-1 flex text-sm text-gray-900 col-span-2 mt-0">
                             <span className="flex-grow"></span>
                             <span className="ml-4 flex-shrink-0">
                               <button
                                 type="button"
-                                className="rounded-md bg-white font-medium text-red-600 hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                                className="rounded-md bg-white font-medium text-red-600 hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 text-base sm:text-sm"
                                 onClick={handleDelete}
                               >
                                 Delete
@@ -547,11 +527,11 @@ export default function Settings() {
                       <ExclamationTriangleIcon className="h-6 w-6 text-red-600" aria-hidden="true" />
                     </div>
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                      <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+                      <Dialog.Title as="h3" className="text-xl font-medium leading-6 text-gray-900">
                         Delete account
                       </Dialog.Title>
                       <div className="mt-2">
-                        <p className="text-sm text-gray-500">
+                        <p className="text-base text-gray-500">
                           Are you sure you want to delete your account? All of your data will be permanently removed
                           from our servers forever. This action cannot be undone.
                         </p>
@@ -561,13 +541,13 @@ export default function Settings() {
                   <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                     <Link
                       href='/settings/delete'
-                      className="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+                      className="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto text-base sm:text-sm"
                     >
                       Delete
                     </Link>
                     <button
                       type="button"
-                      className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm"
+                      className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto text-base sm:text-sm"
                       onClick={() => setOpen(false)}
                     >
                       Cancel

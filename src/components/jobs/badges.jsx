@@ -1,9 +1,8 @@
 const prizes = {
-	1: ['$1,000 referral Bonus', 'Mega Sweepstakes'],
-
-	2: ['$250 referral bonus', 'Sweepstakes', '2x'],
-
-	3: ['Sweepstakes'],
+	1: ['$1,000 referral bonus'],
+	2: ['$500 referral bonus'],
+	3: ['$250 referral bonus'],
+	4: [],
 };
 
 export default function Badges({ tier }) {

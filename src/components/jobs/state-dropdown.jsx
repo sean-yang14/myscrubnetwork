@@ -5,10 +5,10 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 const states = [
 	{ id: 1, name: 'All' },
 	{ id: 2, name: 'CT' },
-	{ id: 3, name: 'MA' },
-	{ id: 4, name: 'NJ' },
-	{ id: 5, name: 'NY' },
-	{ id: 6, name: 'PA' },
+	// { id: 3, name: 'MA' },
+	{ id: 3, name: 'NJ' },
+	{ id: 4, name: 'NY' },
+	// { id: 6, name: 'PA' },
 ];
 
 function classNames(...classes) {
@@ -19,9 +19,9 @@ export default function StateDropdown({ selected, handleChange }) {
 	return (
 		<Listbox placeholder='NY' value={selected} onChange={handleChange}>
 			{({ open }) => (
-				<div className='flex-col justify-center items-center'>
-					<Listbox.Label className='block text-lg font-medium text-gray-700'>
-						Practice Location State
+				<div className='flex space-x-4 justify-center items-center'>
+					<Listbox.Label className='block text-base font-medium text-center text-indigo-700'>
+						State
 					</Listbox.Label>
 					<div className='relative mt-1'>
 						<Listbox.Button className='h-10 relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-center shadow-xl focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm'>
@@ -41,7 +41,7 @@ export default function StateDropdown({ selected, handleChange }) {
 							leaveFrom='opacity-100'
 							leaveTo='opacity-0'
 						>
-							<Listbox.Options className='absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+							<Listbox.Options className='absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
 								{states.map((state) => (
 									<Listbox.Option
 										key={state.id}
@@ -58,7 +58,7 @@ export default function StateDropdown({ selected, handleChange }) {
 												<span
 													className={classNames(
 														selected ? 'font-semibold' : 'font-normal',
-														'block truncate'
+														'block truncate text-sm'
 													)}
 												>
 													{state.name}
