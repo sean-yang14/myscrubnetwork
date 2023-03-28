@@ -38,6 +38,8 @@ export default function Listing({ formEntries }) {
 		type: '',
 		message: '',
 		price: '',
+		bid: '',
+		weeks: '',
 	};
 
 	const [formData, setFormData] = useState({
@@ -56,6 +58,7 @@ export default function Listing({ formEntries }) {
 			setFormData({
 				...newEntry,
 			});
+			setDescription('');
 		} else {
 			setStatus({
 				info: {
@@ -81,7 +84,6 @@ export default function Listing({ formEntries }) {
 
 	const handleOnSubmit = (e) => {
 		e.preventDefault();
-		console.log(description.length);
 
 		// Validations
 		if (!description || description.length < 15) {
@@ -264,34 +266,97 @@ export default function Listing({ formEntries }) {
 								</div>
 
 								<div className='pt-8'>
-									<h3 className='text-lg font-medium leading-6 text-gray-900'>
-										Add referral bonus (strongly recommended)
-									</h3>
-									<p className='text-base leading-6 text-gray-900'>
-										A referral bonus signficantly decreases the time it takes to
-										fill a position.
-									</p>
-									<div className='mt-4'>
-										<label
-											htmlFor='price'
-											className='block text-sm font-medium leading-6 text-gray-900'
-										>
-											Price
-										</label>
-										<div className='relative mt-1 rounded-md shadow-sm'>
-											<div className='pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3'>
-												<span className='text-gray-500 sm:text-sm'>$</span>
+									<div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
+										<div className='sm:col-span-3'>
+											<h3 className='text-lg font-medium leading-6 text-gray-900'>
+												Add referral bonus (strongly recommended)
+											</h3>
+											<p className='text-base leading-6 text-gray-900'>
+												A referral bonus significantly increases the chance of
+												getting applicants.
+											</p>
+											<div className='mt-4'>
+												<label
+													htmlFor='price'
+													className='block text-sm font-medium leading-6 text-gray-900'
+												>
+													Price
+												</label>
+												<div className='relative mt-1 rounded-md shadow-sm'>
+													<div className='pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3'>
+														<span className='text-gray-500 sm:text-sm'>$</span>
+													</div>
+													<input
+														type='text'
+														name='price'
+														id='price'
+														value={formData.price}
+														onChange={handleChange}
+														className='block w-full rounded-md border-0 py-1.5 pl-7 pr-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+														placeholder='500'
+														aria-describedby='price-currency'
+													/>
+												</div>
 											</div>
-											<input
-												type='text'
-												name='price'
-												id='price'
-												value={formData.price}
-												onChange={handleChange}
-												className='block w-full sm:w-1/2 lg:w-1/3 rounded-md border-0 py-1.5 pl-7 pr-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
-												placeholder='500'
-												aria-describedby='price-currency'
-											/>
+										</div>
+										<div className='sm:col-span-3'>
+											<h3 className='text-lg font-medium leading-6 text-gray-900'>
+												Sponsor post
+											</h3>
+											<p className='text-base leading-6 text-gray-900'>
+												Have your job sit at the top of the search results.
+												Sponsored posts are placed in order of the highest bid
+												to lowest.
+											</p>
+											<div className='mt-4'>
+												<div className='flex space-x-4'>
+													<div className='w-1/2'>
+														<label
+															htmlFor='bid'
+															className='block text-sm font-medium leading-6 text-gray-900'
+														>
+															Bid
+														</label>
+														<div className='relative mt-1 rounded-md shadow-sm'>
+															<div className='pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3'>
+																<span className='text-gray-500 sm:text-sm'>
+																	$
+																</span>
+															</div>
+															<input
+																type='text'
+																name='bid'
+																id='bid'
+																value={formData.bid}
+																onChange={handleChange}
+																className='block w-full  rounded-md border-0 py-1.5 pl-7 pr-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+																placeholder='Starting bid $25'
+																aria-describedby='sponsor-bid'
+															/>
+														</div>
+													</div>
+													<div className='w-1/2'>
+														<label
+															htmlFor='weeks'
+															className='block text-sm font-medium leading-6 text-gray-900'
+														>
+															Weeks
+														</label>
+														<div className='relative mt-1 rounded-md shadow-sm'>
+															<input
+																type='text'
+																name='weeks'
+																id='weeks'
+																value={formData.weeks}
+																onChange={handleChange}
+																className='block w-full  rounded-md border-0 py-1.5 pr-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+																placeholder='4'
+																aria-describedby='sponsor-weeks'
+															/>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>

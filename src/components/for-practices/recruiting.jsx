@@ -3,7 +3,7 @@ export default function Recruiting() {
 		<div className='bg-white'>
 			<div className='mx-auto max-w-7xl py-24 px-6 sm:py-32 lg:px-8'>
 				<h2 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
-					Want to Find a Specific Candidate Quickly?
+					Want to find a specific candidate quickly?
 					<br />
 					We offer affordable, personalized recruiting services
 				</h2>

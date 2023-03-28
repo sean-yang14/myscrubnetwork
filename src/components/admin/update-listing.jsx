@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import ListingDetails from './listing-details';
 
 export default function NewListing({ formEntries, id }) {
+	const router = useRouter();
 	const [loading, setLoading] = useState(false);
 	const [post, setPost] = useState({
 		title: '',

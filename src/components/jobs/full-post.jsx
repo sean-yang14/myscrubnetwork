@@ -97,7 +97,9 @@ export default function FullPost({ selectedJob, screen, handleClick }) {
 				<dl className='divide-y divide-gray-200'>
 					<div className='py-4'>
 						<dt className='text-xl font-medium text-gray-900'>Salary</dt>
-						<dd className='mt-1 text-gray-700 '>{`${selectedJob?.salary} per ${selectedJob?.interval}`}</dd>
+						{selectedJob?.salary && (
+							<dd className='mt-1 text-gray-700 '>{`${selectedJob?.salary} per ${selectedJob?.interval}`}</dd>
+						)}
 					</div>
 					<div className='py-4'>
 						<dt className='text-xl font-medium text-gray-900'>Schedule</dt>

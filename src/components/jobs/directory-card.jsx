@@ -6,7 +6,7 @@ import Badges from './badges';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, deleteDoc } from 'firebase/firestore';
 import { db } from '../../../lib/firebase.config';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
@@ -14,7 +14,7 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(' ');
 }
 
-export default function DirectoryCard({ job }) {
+export default function DirectoryCard({ job, current }) {
 	const router = useRouter();
 
 	// Check if user is admin
@@ -51,8 +51,26 @@ export default function DirectoryCard({ job }) {
 		};
 	}, [auth]);
 
+	const deleteListing = async (id) => {
+		try {
+			console.log('starting');
+			const listingRef = doc(db, 'listings', id);
+			console.log(id);
+			await deleteDoc(listingRef);
+			console.log('done');
+			// location.reload();
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
-		<div className='overflow-hidden bg-white border-gray-200 border-[1px] shadow rounded-lg mb-4 lg:mb-6 mr-8 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 hover:bg-gray-50'>
+		<div
+			className={classNames(
+				current && 'border-[3px] border-indigo-500',
+				'overflow-hidden bg-white border-gray-200 border-[1px] shadow rounded-lg mb-4 lg:mb-6 mr-8 active:ring-2 active:ring-2 active:ring-inset active:ring-indigo-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 hover:bg-gray-50'
+			)}
+		>
 			<div className='px-4 py-2 sm:px-6 flex flex-col'>
 				{/* Admin Icons */}
 				{userData?.admin === 'yes' && (
@@ -65,6 +83,9 @@ export default function DirectoryCard({ job }) {
 						</Link>
 						<button
 							type='button'
+							onClick={() => {
+								deleteListing(job.id);
+							}}
 							className='inline-flex items-center rounded-full border border-transparent bg-red-600 p-1 text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2'
 						>
 							<XMarkIcon className='h-5 w-5' aria-hidden='true' />
@@ -109,9 +130,11 @@ export default function DirectoryCard({ job }) {
 					</h4>
 				</div>
 				<div className='flex gap-x-4 mt-4 mb-4'>
-					<span className='w-fit inline-flex items-center rounded-md bg-green-100 px-2.5 py-0.5 font-medium text-green-800'>
-						{`${job.salary} per ${job.interval}`}
-					</span>
+					{job.salary && (
+						<span className='w-fit inline-flex items-center rounded-md bg-green-100 px-2.5 py-0.5 font-medium text-green-800'>
+							{`${job.salary} per ${job.interval}`}
+						</span>
+					)}
 					<span className='w-fit inline-flex items-center rounded-md bg-orange-100 px-2.5 py-0.5 font-medium text-orange-800'>
 						{job.schedule}
 					</span>

@@ -8,19 +8,19 @@ const features = [
 	{
 		name: 'Reach 100+ Dentists in the NYC Area',
 		description:
-			"Our network includes high quality dentists from a variety of backgrounds. So whatever you're looking for, you can find here.",
+			"Our network includes high quality dentists from a variety of backgrounds. So whatever you're looking for, you can find it here.",
 		icon: UserGroupIcon,
 	},
 	{
 		name: 'Posts are Free, No Strings Attached',
 		description:
-			'Unlike other job boards, you can post for free with no limitations and posts stay up until the role is filled.',
+			'Unlike other job boards, posts are free and they stay up until the role is filled.',
 		icon: CreditCardIcon,
 	},
 	{
 		name: 'Made for Dentists',
 		description:
-			'Most job boards are designed for corporate jobs. Our products solve problems that are unique to dental practices. That results in more relevant candidates seeing your job post and positions gettting filled faster.',
+			'Most job boards are designed for corporate jobs. Our products solve problems that are unique to dental practices.',
 		icon: WrenchIcon,
 	},
 ];
@@ -34,7 +34,7 @@ export default function Features() {
 						Why Post on Scrub Network
 					</h2>
 					<p className='mt-6 text-lg leading-8 text-gray-600'>
-						Our posts reach qualified docotrs faster than any other site. We
+						Our posts reach qualified doctors faster than any other site. We
 						also offer market leading affordable prices for our services.
 					</p>
 				</div>

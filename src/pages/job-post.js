@@ -72,7 +72,7 @@ const formEntries = [
 		type: 'text',
 		name: 'schedule',
 		id: 'schedule',
-		placeholder: 'Full Time / Part Time / Contract',
+		placeholder: 'Full Time, Part Time, Contract',
 		aria: 'dentist schedule',
 	},
 	{

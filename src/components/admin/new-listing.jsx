@@ -52,7 +52,7 @@ export default function NewListing({ formEntries }) {
 
 		setLoading(false);
 		// setPost(newEntry);
-		// setDescription('');
+		setDescription('');
 		toast.success('Listing Saved');
 	};
 

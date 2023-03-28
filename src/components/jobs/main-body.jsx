@@ -7,6 +7,10 @@ import StateDropdown from '@/components/jobs/state-dropdown';
 import MainCard from '@/components/layout/main-card';
 import Cities from './cities';
 
+function classNames(...classes) {
+	return classes.filter(Boolean).join(' ');
+}
+
 export default function MainBody({
 	setOpen,
 	open,
@@ -24,6 +28,7 @@ export default function MainBody({
 	cityList,
 	setCitiesSelected,
 	setCitiesSubmitted,
+	currentCard,
 }) {
 	const [showCities, setShowCities] = useState(false);
 
@@ -99,7 +104,10 @@ export default function MainBody({
 										{listings?.map((job, i) => {
 											return (
 												<li key={i} id={i} onClick={handleClick}>
-													<DirectoryCard job={job} />
+													<DirectoryCard
+														job={job}
+														current={currentCard[i] ? true : false}
+													/>
 												</li>
 											);
 										})}

@@ -29,7 +29,6 @@ export default function OAuth(props) {
 				});
 				router.push('/sign-up/complete-profile');
 			}
-
 			router.push('/jobs');
 		} catch (error) {
 			toast.error('Could not authorize with Google');

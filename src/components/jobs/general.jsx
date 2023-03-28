@@ -28,7 +28,23 @@ export default function General({ practiceType }) {
 	const [citiesSelected, setCitiesSelected] = useState([]);
 	const [cityList, setCityList] = useState([]);
 	const [citiesSubmitted, setCitiesSubmitted] = useState(false);
+	const [currentCard, setCurrentCard] = useState({
+		0: true,
+		1: false,
+		2: false,
+		3: false,
+		4: false,
+	});
 
+	const noCardSelected = {
+		0: false,
+		1: false,
+		2: false,
+		3: false,
+		4: false,
+	};
+
+	// if you change the post limit then you have to update currentCard in main body
 	const postLimit = 5;
 
 	// Pull data on load and if state is updated
@@ -197,6 +213,10 @@ export default function General({ practiceType }) {
 			setSelectedJob(listings[0]);
 			setLoading(false);
 			setCurrentPage(currentPage + 1);
+			setCurrentCard({
+				...noCardSelected,
+				0: true,
+			});
 		} catch (error) {
 			toast.error('Could not fetch listings');
 			console.log(error);
@@ -224,7 +244,7 @@ export default function General({ practiceType }) {
 					where('city', 'in', citiesSelected),
 					endBefore(firstFetchedListing)
 				);
-			} else if (stateSelected !== 'All') {
+			} else if (stateSelected.name !== 'All') {
 				// Run state specific query
 				listingsQuery = query(
 					listingsRef,
@@ -270,6 +290,10 @@ export default function General({ practiceType }) {
 			setSelectedJob(listings[0]);
 			setLoading(false);
 			setCurrentPage(currentPage - 1);
+			setCurrentCard({
+				...noCardSelected,
+				0: true,
+			});
 		} catch (error) {
 			toast.error('Could not fetch listings');
 			console.log(error);
@@ -279,6 +303,10 @@ export default function General({ practiceType }) {
 	const handleClick = (e) => {
 		setSelectedJob(listings[e.currentTarget.id]);
 		setOpen(true);
+		setCurrentCard({
+			...noCardSelected,
+			[e.currentTarget.id]: true,
+		});
 	};
 
 	// Pull data if cities are updated
@@ -382,6 +410,7 @@ export default function General({ practiceType }) {
 				cityList={cityList}
 				setCitiesSelected={setCitiesSelected}
 				setCitiesSubmitted={setCitiesSubmitted}
+				currentCard={currentCard}
 			/>
 		</>
 	);

@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 export default function CallToAction() {
 	return (
-		<div className='bg-indigo-700'>
-			<div className='py-12 px-6 sm:px-6 sm:py-20 lg:px-8'>
+		<div className='bg-indigo-700 rounded-lg'>
+			<div className='py-12 px-6 sm:px-6 sm:py-18 lg:px-8'>
 				<div className='mx-auto max-w-2xl text-center'>
 					<h2 className='text-3xl font-bold tracking-tight text-white sm:text-4xl'>
 						Post a Job Today.

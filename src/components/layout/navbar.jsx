@@ -81,11 +81,11 @@ export default function Example() {
 
 	const handleLogout = async (e) => {
 		await signOut(auth);
-		router.push('/jobs');
 		setCurrent({
 			...noCurrent,
 			jobs: true,
 		});
+		router.push('/jobs');
 	};
 
 	return (

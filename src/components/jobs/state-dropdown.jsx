@@ -5,9 +5,9 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 const states = [
 	{ id: 1, name: 'All' },
 	{ id: 2, name: 'CT' },
-	// { id: 3, name: 'MA' },
-	{ id: 3, name: 'NJ' },
-	{ id: 4, name: 'NY' },
+	{ id: 3, name: 'MA' },
+	{ id: 4, name: 'NJ' },
+	{ id: 5, name: 'NY' },
 	// { id: 6, name: 'PA' },
 ];
 

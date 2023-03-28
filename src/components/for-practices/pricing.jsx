@@ -15,10 +15,10 @@ const tiers = [
 		name: 'Sponsored Post',
 		id: 'tier-sponsored',
 		href: '/job-post',
-		price: 'Starting at $10',
+		price: 'Starting at $25',
 		description:
 			'Sponsored posts sit at the top of the results in order from highest bid to lowest.',
-		features: ['Sponsorship lasts for a 7 days', 'Minimum bid is $10'],
+		features: ['Sponsorship lasts for a 7 days'],
 		featured: false,
 		cta: 'Sponsor post',
 	},
@@ -28,7 +28,7 @@ const tiers = [
 		href: 'https://www.scrubnetwork.com/',
 		price: 'Plan dependent',
 		description:
-			'Personalized recuriting services at market leading low prices.',
+			'Personalized recruiting services at market leading low prices.',
 		features: [
 			'Targeted candidate search',
 			'Access to our high quality network of doctors',

@@ -8,21 +8,21 @@ const people = [
 		dentalPost: 'No',
 	},
 	{
-		title: 'Standard Price',
+		title: 'Starting Price',
 		scrubNetwork: '',
 		indeed: '',
 		linkedIn: '',
 		zipRecruiter: '$299 per month',
 		dentalPost: '$189 per post',
 	},
-	{
-		title: 'Starting Sponsorship Price',
-		scrubNetwork: '< $2 per post per day',
-		indeed: '$5 per post per day',
-		linkedIn: '$5 per post per day',
-		zipRecruiter: '',
-		dentalPost: '',
-	},
+	// {
+	// 	title: 'Starting Sponsorship Price',
+	// 	scrubNetwork: '< $2 per post per day',
+	// 	indeed: '$5 per post per day',
+	// 	linkedIn: '$5 per post per day',
+	// 	zipRecruiter: '',
+	// 	dentalPost: '',
+	// },
 ];
 
 export default function Competitors() {
