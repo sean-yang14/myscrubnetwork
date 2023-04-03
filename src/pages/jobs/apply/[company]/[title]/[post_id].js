@@ -13,6 +13,8 @@ export default function Apply({company, title, post_id}) {
 export async function getServerSideProps(context) {
   const {company, title, post_id} = context.query
 
+  // context.res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
+
   return {
     props: {
       company,

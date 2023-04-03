@@ -15,7 +15,11 @@ import { db } from '../../../lib/firebase.config';
 import { toast } from 'react-toastify';
 import MainBody from './main-body';
 
-export default function General({ practiceType }) {
+export default function General({
+	practiceType,
+	practiceTypeChanged,
+	setPracticeTypeChanged,
+}) {
 	const [listings, setListings] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [selectedJob, setSelectedJob] = useState();
@@ -49,6 +53,11 @@ export default function General({ practiceType }) {
 
 	// Pull data on load and if state is updated
 	useEffect(() => {
+		if (practiceTypeChanged) {
+			setCitiesSelected([]);
+			setStateSelected({ id: 1, name: 'All' });
+			setPracticeTypeChanged(false);
+		}
 		const fetchListings = async () => {
 			try {
 				let listingsQuery = null;
@@ -62,14 +71,14 @@ export default function General({ practiceType }) {
 					listingsQuery = query(
 						listingsRef,
 						limit(postLimit),
-						orderBy('tier', 'asc'),
+						orderBy('tier', 'desc'),
 						where('type', '==', practiceType),
 						where('specialty', '==', 'general')
 					);
 
 					pageNavQuery = query(
 						listingsRef,
-						orderBy('tier', 'asc'),
+						orderBy('tier', 'desc'),
 						where('type', '==', practiceType),
 						where('specialty', '==', 'general')
 					);
@@ -80,7 +89,7 @@ export default function General({ practiceType }) {
 					listingsQuery = query(
 						listingsRef,
 						limit(postLimit),
-						orderBy('tier', 'asc'),
+						orderBy('tier', 'desc'),
 						where('type', '==', practiceType),
 						where('state', '==', stateSelected.name),
 						where('specialty', '==', 'general')
@@ -88,7 +97,7 @@ export default function General({ practiceType }) {
 
 					pageNavQuery = query(
 						listingsRef,
-						orderBy('tier', 'asc'),
+						orderBy('tier', 'desc'),
 						where('type', '==', practiceType),
 						where('state', '==', stateSelected.name),
 						where('specialty', '==', 'general')
@@ -160,7 +169,7 @@ export default function General({ practiceType }) {
 				listingsQuery = query(
 					listingsRef,
 					limit(postLimit),
-					orderBy('tier', 'asc'),
+					orderBy('tier', 'desc'),
 					where('type', '==', practiceType),
 					where('state', '==', stateSelected.name),
 					where('specialty', '==', 'general'),
@@ -172,7 +181,7 @@ export default function General({ practiceType }) {
 				listingsQuery = query(
 					listingsRef,
 					limit(postLimit),
-					orderBy('tier', 'asc'),
+					orderBy('tier', 'desc'),
 					where('type', '==', practiceType),
 					where('state', '==', stateSelected.name),
 					where('specialty', '==', 'general'),
@@ -183,7 +192,7 @@ export default function General({ practiceType }) {
 				listingsQuery = query(
 					listingsRef,
 					limit(postLimit),
-					orderBy('tier', 'asc'),
+					orderBy('tier', 'desc'),
 					where('type', '==', practiceType),
 					where('specialty', '==', 'general'),
 					startAfter(lastFetchedListing)
@@ -237,7 +246,7 @@ export default function General({ practiceType }) {
 				listingsQuery = query(
 					listingsRef,
 					limitToLast(postLimit),
-					orderBy('tier', 'asc'),
+					orderBy('tier', 'desc'),
 					where('type', '==', practiceType),
 					where('state', '==', stateSelected.name),
 					where('specialty', '==', 'general'),
@@ -249,7 +258,7 @@ export default function General({ practiceType }) {
 				listingsQuery = query(
 					listingsRef,
 					limitToLast(postLimit),
-					orderBy('tier', 'asc'),
+					orderBy('tier', 'desc'),
 					where('type', '==', practiceType),
 					where('state', '==', stateSelected.name),
 					where('specialty', '==', 'general'),
@@ -260,7 +269,7 @@ export default function General({ practiceType }) {
 				listingsQuery = query(
 					listingsRef,
 					limitToLast(postLimit),
-					orderBy('tier', 'asc'),
+					orderBy('tier', 'desc'),
 					where('type', '==', practiceType),
 					where('specialty', '==', 'general'),
 					endBefore(firstFetchedListing)
@@ -323,7 +332,7 @@ export default function General({ practiceType }) {
 				listingsQuery = query(
 					listingsRef,
 					limit(postLimit),
-					orderBy('tier', 'asc'),
+					orderBy('tier', 'desc'),
 					where('type', '==', practiceType),
 					where('specialty', '==', 'general'),
 					where('city', 'in', citiesSelected)
@@ -331,7 +340,7 @@ export default function General({ practiceType }) {
 
 				pageNavQuery = query(
 					listingsRef,
-					orderBy('tier', 'asc'),
+					orderBy('tier', 'desc'),
 					where('type', '==', practiceType),
 					where('specialty', '==', 'general'),
 					where('city', 'in', citiesSelected)
@@ -411,6 +420,7 @@ export default function General({ practiceType }) {
 				setCitiesSelected={setCitiesSelected}
 				setCitiesSubmitted={setCitiesSubmitted}
 				currentCard={currentCard}
+				practiceType={practiceType}
 			/>
 		</>
 	);

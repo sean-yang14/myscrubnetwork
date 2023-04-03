@@ -1,6 +1,6 @@
 import SignInComponent from "@/components/login/sign-in"
 
-export default function DynamicSignIn({pid }) {
+export default function DynamicSignIn({pid }) {  
   
   return (
     <>

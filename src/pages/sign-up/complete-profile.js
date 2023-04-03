@@ -41,6 +41,11 @@ export default function CompleteProfile() {
     await updateDoc(userRef, {
       ...formCopy
     })
+
+    const protectedPage = sessionStorage.getItem('protectedPage')
+    if (protectedPage) {
+      router.push(protectedPage)
+    }
     router.push('/jobs')
   } 
 

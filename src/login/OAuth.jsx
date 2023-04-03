@@ -29,7 +29,12 @@ export default function OAuth(props) {
 				});
 				router.push('/sign-up/complete-profile');
 			}
-			router.push('/jobs');
+			const protectedPage = sessionStorage.getItem('protectedPage');
+			if (protectedPage) {
+				router.push(protectedPage);
+			} else {
+				router.push('/jobs');
+			}
 		} catch (error) {
 			toast.error('Could not authorize with Google');
 		}

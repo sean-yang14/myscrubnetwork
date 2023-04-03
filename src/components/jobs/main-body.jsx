@@ -29,6 +29,7 @@ export default function MainBody({
 	setCitiesSelected,
 	setCitiesSubmitted,
 	currentCard,
+	practiceType,
 }) {
 	const [showCities, setShowCities] = useState(false);
 
@@ -52,6 +53,7 @@ export default function MainBody({
 						<StateDropdown
 							selected={stateSelected}
 							handleChange={handleStateChange}
+							practiceType={practiceType}
 						/>
 						<div className='flex space-x-4 justify-center items-center'>
 							<div className='block text-base font-medium text-center text-indigo-700'>

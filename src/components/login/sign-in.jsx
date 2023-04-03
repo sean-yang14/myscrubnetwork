@@ -61,7 +61,12 @@ export default function SignInComponent({ instructions }) {
 			// }
 
 			if (userCredential.user) {
-				router.push('/jobs');
+				const protectedPage = sessionStorage.getItem('protectedPage');
+				if (protectedPage) {
+					router.push(protectedPage);
+				} else {
+					router.push('/jobs');
+				}
 			}
 		} catch (error) {
 			toast.error('Bad User Credentils');

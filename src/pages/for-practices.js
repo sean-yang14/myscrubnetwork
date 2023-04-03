@@ -15,7 +15,6 @@ export default function ForPractices() {
       <Features />
       <Competitors />
       <Pricing />
-      {/* Link to scrubnetwork */}
       <CallToAction />
       <Recruiting />
       <Footer />

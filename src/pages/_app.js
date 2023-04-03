@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }) {
       onAuthStateChanged(auth, (user) => {
         if (user) {
           setUser(user)
-          console.log(user)
+          // console.log(user)
         }
         setCheckingStatus(false)
       })
@@ -41,6 +41,7 @@ export default function App({ Component, pageProps }) {
   }
 
   if (pageProps.protected && !checkingStatus && !user) {
+    sessionStorage.setItem('protectedPage', router.asPath)
     router.push('/sign-in/access')
   }
 

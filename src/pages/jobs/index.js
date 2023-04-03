@@ -35,6 +35,8 @@ export default function Jobs() {
     dso: false,
   })
 
+  const [practiceTypeChanged, setPracticeTypeChanged] = useState(false)
+
   const resetToggle = {
     private: false,
     dso: false,
@@ -50,6 +52,7 @@ export default function Jobs() {
       ...resetToggle,
       [e.target.id]:true
     })
+    setPracticeTypeChanged(true)
   }
 
   // To search using loop
@@ -72,7 +75,7 @@ export default function Jobs() {
       <PracticeToggle tabs={toggle} handleClick={handleToggleClick} />
       {
         selectedTab.general === true ?
-        <General practiceType={type} /> :
+        <General practiceType={type} practiceTypeChanged={practiceTypeChanged} setPracticeTypeChanged={setPracticeTypeChanged}/> :
         <h1>TBD</h1>
       }
     </>

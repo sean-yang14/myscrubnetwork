@@ -2,20 +2,35 @@ import { Fragment, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 
-const states = [
-	{ id: 1, name: 'All' },
-	{ id: 2, name: 'CT' },
-	{ id: 3, name: 'MA' },
-	{ id: 4, name: 'NJ' },
-	{ id: 5, name: 'NY' },
-	// { id: 6, name: 'PA' },
-];
-
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ');
 }
 
-export default function StateDropdown({ selected, handleChange }) {
+export default function StateDropdown({
+	selected,
+	handleChange,
+	practiceType,
+}) {
+	let states = [];
+	if (practiceType == 'private') {
+		states = [
+			{ id: 1, name: 'All' },
+			// { id: 2, name: 'CT' },
+			// { id: 3, name: 'MA' },
+			{ id: 2, name: 'NJ' },
+			{ id: 3, name: 'NY' },
+			// { id: 6, name: 'PA' },
+		];
+	} else {
+		states = [
+			{ id: 1, name: 'All' },
+			{ id: 2, name: 'CT' },
+			{ id: 3, name: 'MA' },
+			// { id: 4, name: 'NJ' },
+			{ id: 4, name: 'NY' },
+			// { id: 6, name: 'PA' },
+		];
+	}
 	return (
 		<Listbox placeholder='NY' value={selected} onChange={handleChange}>
 			{({ open }) => (

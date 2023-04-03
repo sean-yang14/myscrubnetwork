@@ -25,7 +25,7 @@ export default function SignUp() {
     email: '',
     password: ''
   })
-
+  const [error, setError] = useState(false)
   const {name, email, password} = formData
 
   const handleChange = (e) => {
@@ -34,6 +34,7 @@ export default function SignUp() {
       ...prevState,
       [e.target.id]: e.target.value
     }))
+    setError(false)
   }
 
   const handleSubmit = async (e) => {
@@ -76,6 +77,7 @@ export default function SignUp() {
       router.push('/sign-up/complete-profile')
     } catch (error) {
       console.log(error)
+      setError(true)
       toast.error('Something went wrong with registration')
     }
   }
@@ -131,6 +133,7 @@ export default function SignUp() {
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   />
                 </div>
+                {error && <p className='mt-2 text-sm text-red-500'>Email already in use</p>}
               </div>
 
               <div>
