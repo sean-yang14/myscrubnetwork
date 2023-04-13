@@ -4,7 +4,7 @@ const tiers = [
 	{
 		name: 'Standard Post',
 		id: 'tier-standard',
-		href: '/job-post',
+		href: '/post-a-job',
 		price: 'Free',
 		description: 'For optimal results, we suggest offering a referral bonus.',
 		features: ['Unlimited posts', 'Posts stay up until role is filled'],
@@ -14,8 +14,8 @@ const tiers = [
 	{
 		name: 'Sponsored Post',
 		id: 'tier-sponsored',
-		href: '/job-post',
-		price: 'Starting at $25',
+		href: '/post-a-job',
+		price: 'Starting at $15',
 		description:
 			'Sponsored posts sit at the top of the results in order from highest bid to lowest.',
 		features: ['Sponsorship lasts for a 7 days'],
@@ -25,7 +25,7 @@ const tiers = [
 	{
 		name: 'Recruiting Services',
 		id: 'tier-recruiting',
-		href: 'https://www.scrubnetwork.com/',
+		href: '/recruiting',
 		price: 'Plan dependent',
 		description:
 			'Personalized recruiting services at market leading low prices.',
@@ -47,7 +47,7 @@ export default function Example() {
 	return (
 		<div className='bg-white py-24 sm:py-32'>
 			<div className='mx-auto max-w-7xl px-6 lg:px-8'>
-				<div className='mx-auto max-w-4xl text-center'>
+				<div className='max-w-4xl'>
 					{/* <h2 className='text-base font-semibold leading-7 text-indigo-600'>
 						Pricing
 					</h2> */}
@@ -55,7 +55,7 @@ export default function Example() {
 						Product Offerings
 					</p>
 				</div>
-				<p className='mx-auto mt-6 max-w-2xl text-center text-xl leading-8 text-gray-600'>
+				<p className='mt-6 max-w-2xl text-xl leading-8 text-gray-600'>
 					No matter your hiring challenges, we have a solution.
 				</p>
 				<div className='isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3'>

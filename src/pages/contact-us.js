@@ -262,7 +262,7 @@ export default function Contact() {
                       </dt>
                       <dd className="flex text-sm text-indigo-50">
                         <PhoneIcon className="h-6 w-6 flex-shrink-0 text-indigo-200" aria-hidden="true" />
-                        <span className="ml-3 text-base">+1 (917) 960-3082</span>
+                        <span className="ml-3 text-base">+1 (847) 313-0042</span>
                       </dd>
                       <dt>
                         <span className="sr-only">Email</span>

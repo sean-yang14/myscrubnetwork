@@ -19,6 +19,8 @@ export default function Example() {
 		jobs: false,
 		practices: false,
 		contact: false,
+		recruiting: false,
+		events: false,
 	};
 	const [current, setCurrent] = useState({
 		...noCurrent,
@@ -107,7 +109,7 @@ export default function Example() {
 										</div>
 									</Link>
 								</div>
-								<div className='hidden sm:ml-6 sm:flex sm:space-x-8'>
+								<div className='hidden lg:ml-6 lg:flex lg:space-x-8'>
 									<Link
 										href='/jobs'
 										className={classNames(
@@ -135,6 +137,32 @@ export default function Example() {
 										For Practices
 									</Link>
 									<Link
+										href='/recruiting'
+										className={classNames(
+											current.recruiting
+												? 'border-indigo-500 text-gray-900'
+												: 'border-transparent text-gray-500',
+											'inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium'
+										)}
+										onClick={handleClick}
+										name='recruiting'
+									>
+										Recruiting
+									</Link>
+									<Link
+										href='/events'
+										className={classNames(
+											current.events
+												? 'border-indigo-500 text-gray-900'
+												: 'border-transparent text-gray-500',
+											'inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium'
+										)}
+										onClick={handleClick}
+										name='events'
+									>
+										Events
+									</Link>
+									<Link
 										href='/contact-us'
 										className={classNames(
 											current.contact
@@ -149,7 +177,7 @@ export default function Example() {
 									</Link>
 								</div>
 							</div>
-							<div className='hidden sm:ml-6 sm:flex sm:items-center'>
+							<div className='hidden lg:ml-6 lg:flex lg:items-center'>
 								<span className='ml-4 flex flex-shrink-0 items-start space-x-4'>
 									{/* Profile dropdown */}
 									{userData ? (
@@ -213,7 +241,7 @@ export default function Example() {
 										|
 									</span>
 									<Link
-										href='/job-post'
+										href='/post-a-job'
 										className='inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-semibold text-slate-700 hover:border-slate-300 hover:text-slate-900'
 										onClick={handleOtherIcons}
 									>
@@ -221,7 +249,7 @@ export default function Example() {
 									</Link>
 								</span>
 							</div>
-							<div className='-mr-2 flex items-center sm:hidden'>
+							<div className='-mr-2 flex items-center lg:hidden'>
 								{/* Mobile menu button */}
 								<Disclosure.Button className='inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'>
 									<span className='sr-only'>Open main menu</span>
@@ -235,7 +263,7 @@ export default function Example() {
 						</div>
 					</div>
 
-					<Disclosure.Panel className='sm:hidden'>
+					<Disclosure.Panel className='lg:hidden'>
 						<div className='space-y-1 pt-2 pb-3'>
 							<Disclosure.Button
 								as='a'
@@ -267,6 +295,34 @@ export default function Example() {
 							</Disclosure.Button>
 							<Disclosure.Button
 								as='a'
+								href='/recruiting'
+								onClick={handleClick}
+								className={classNames(
+									current.recruiting
+										? 'border-indigo-500 bg-indigo-50 text-indigo-700'
+										: 'border-transparent text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700',
+									'block border-l-4 py-2 pl-3 pr-4 text-base font-medium'
+								)}
+								name='contract'
+							>
+								Recruiting
+							</Disclosure.Button>
+							<Disclosure.Button
+								as='a'
+								href='/events'
+								onClick={handleClick}
+								className={classNames(
+									current.events
+										? 'border-indigo-500 bg-indigo-50 text-indigo-700'
+										: 'border-transparent text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700',
+									'block border-l-4 py-2 pl-3 pr-4 text-base font-medium'
+								)}
+								name='contract'
+							>
+								Events
+							</Disclosure.Button>
+							<Disclosure.Button
+								as='a'
 								href='contact-us'
 								onClick={handleClick}
 								className={classNames(
@@ -280,35 +336,63 @@ export default function Example() {
 								Contact
 							</Disclosure.Button>
 						</div>
-						<div className='border-t border-gray-200 pt-4 pb-3'>
-							<div className='flex items-center px-4'>
-								<div className='flex-shrink-0'>
-									<UserIcon className='h-7 w-7 rounded-full' />
-								</div>
-								<div className='ml-3'>
-									<div className='text-base font-medium text-gray-800'>
-										{userData?.name}
-									</div>
-									<div className='text-sm font-medium text-gray-500'>
-										{userData?.email}
-									</div>
+						{!userData && (
+							<div className='border-t border-gray-200 pt-4 pb-3'>
+								<div className='space-y-1'>
+									<Disclosure.Button
+										as='a'
+										href='/sign-in'
+										className='block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800'
+										onClick={handleOtherIcons}
+									>
+										Sign In
+									</Disclosure.Button>
 								</div>
 							</div>
-							<div className='mt-3 space-y-1'>
+						)}
+						{userData && (
+							<div className='border-t border-gray-200 pt-4 pb-3'>
+								<div className='flex items-center px-4'>
+									<div className='flex-shrink-0'>
+										<UserIcon className='h-7 w-7 rounded-full' />
+									</div>
+									<div className='ml-3'>
+										<div className='text-base font-medium text-gray-800'>
+											{userData?.name}
+										</div>
+										<div className='text-sm font-medium text-gray-500'>
+											{userData?.email}
+										</div>
+									</div>
+								</div>
+								<div className='space-y-1'>
+									<Disclosure.Button
+										as='a'
+										href='/settings'
+										className='block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800'
+										onClick={handleOtherIcons}
+									>
+										Settings
+									</Disclosure.Button>
+									<Disclosure.Button
+										as='a'
+										onClick={handleLogout}
+										className='block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800'
+									>
+										Sign Out
+									</Disclosure.Button>
+								</div>
+							</div>
+						)}
+						<div className='border-t border-gray-200 pt-4 pb-3'>
+							<div className='space-y-1'>
 								<Disclosure.Button
 									as='a'
-									href='/settings'
+									href='/post-a-job'
 									className='block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800'
 									onClick={handleOtherIcons}
 								>
-									Settings
-								</Disclosure.Button>
-								<Disclosure.Button
-									as='a'
-									onClick={handleLogout}
-									className='block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800'
-								>
-									Sign Out
+									Post a Job
 								</Disclosure.Button>
 							</div>
 						</div>

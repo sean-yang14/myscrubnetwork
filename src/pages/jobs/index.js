@@ -1,5 +1,6 @@
 import MainLayout from "@/components/layout/main-layout"
 import General from "@/components/jobs/general"
+import Footer from '@/components/layout/footer'
 import Tabs from "@/components/jobs/tabs";
 import { useState } from "react";
 import PracticeToggle from "@/components/jobs/practice-toggle";
@@ -78,6 +79,7 @@ export default function Jobs() {
         <General practiceType={type} practiceTypeChanged={practiceTypeChanged} setPracticeTypeChanged={setPracticeTypeChanged}/> :
         <h1>TBD</h1>
       }
+      <Footer />
     </>
   )
 }
