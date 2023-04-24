@@ -23,6 +23,17 @@ const tiers = [
 		cta: 'Sponsor post',
 	},
 	{
+		name: 'Instagram',
+		id: 'tier-instagram',
+		href: '/post-a-job',
+		price: '$500',
+		description:
+			"Have your post shared via our instagram account. It's the fastest and most direct way to reach candidates in our network.",
+		features: ['Posts stay up until role is filled'],
+		featured: false,
+		cta: 'Post on Instagram',
+	},
+	{
 		name: 'Recruiting Services',
 		id: 'tier-recruiting',
 		href: '/recruiting',
@@ -58,7 +69,7 @@ export default function Example() {
 				<p className='mt-6 max-w-2xl text-xl leading-8 text-gray-600'>
 					No matter your hiring challenges, we have a solution.
 				</p>
-				<div className='isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
+				<div className='isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-4'>
 					{tiers.map((tier) => (
 						<div
 							key={tier.id}

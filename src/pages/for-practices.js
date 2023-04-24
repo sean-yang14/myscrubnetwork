@@ -15,8 +15,8 @@ export default function ForPractices() {
       <Features />
       <Competitors />
       <Pricing />
-      <CallToAction />
-      <Recruiting />
+      {/* <CallToAction />
+      <Recruiting /> */}
       <Footer />
     </MainCard>
   )

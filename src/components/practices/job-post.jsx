@@ -35,11 +35,10 @@ export default function Listing({ formEntries }) {
 		salary: '',
 		interval: '',
 		schedule: '',
-		type: '',
-		message: '',
 		price: '',
 		bid: '',
 		weeks: '',
+		instagram: false,
 	};
 
 	const [formData, setFormData] = useState({
@@ -67,6 +66,13 @@ export default function Listing({ formEntries }) {
 			});
 			console.log(msg);
 		}
+	};
+
+	const handleCheckbox = (e) => {
+		setFormData((prev) => ({
+			...prev,
+			[e.target.name]: !formData.instagram,
+		}));
 	};
 
 	const handleChange = (e) => {
@@ -356,6 +362,51 @@ export default function Listing({ formEntries }) {
 														</div>
 													</div>
 												</div>
+											</div>
+										</div>
+										<div className='sm:col-span-3'>
+											<h3 className='text-lg font-medium leading-6 text-gray-900'>
+												Post on Instagram
+											</h3>
+											<p className='text-base leading-6 text-gray-900'>
+												Reach dentists and their network directly through social
+												media.
+											</p>
+											<div className='mt-4'>
+												<fieldset>
+													<legend className='sr-only'>Instagram</legend>
+													<div className='space-y-5'>
+														<div className='relative flex items-start'>
+															<div className='flex h-6 items-center'>
+																<input
+																	id='instagram'
+																	aria-describedby='instagram-offering-option'
+																	name='instagram'
+																	type='checkbox'
+																	value={true}
+																	onChange={handleCheckbox}
+																	// checked={formData.instagram}
+																	className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
+																/>
+															</div>
+															<div className='ml-3 text-sm leading-6'>
+																<label
+																	htmlFor='instagram'
+																	className='font-medium text-gray-900'
+																>
+																	Yes, I want an Instagram Post
+																</label>
+																{/* <p
+																	id='comments-description'
+																	className='text-gray-500'
+																>
+																	Get notified when someones posts a comment on
+																	a posting.
+																</p> */}
+															</div>
+														</div>
+													</div>
+												</fieldset>
 											</div>
 										</div>
 									</div>
