@@ -6,8 +6,13 @@ const tiers = [
 		id: 'tier-standard',
 		href: '/post-a-job',
 		price: 'Free',
-		description: 'For optimal results, we suggest offering a referral bonus.',
-		features: ['Unlimited posts', 'Posts stay up until role is filled'],
+		description:
+			'For optimal results, we suggest offering a referral bonus. 100% goes to the referrer.',
+		features: [
+			'Unlimited posts',
+			'Posts stay up until role is filled',
+			'Posts with a referral bonus of at least $300 get shared directly with dentists',
+		],
 		featured: false,
 		cta: 'Create post',
 	},
@@ -15,38 +20,41 @@ const tiers = [
 		name: 'Sponsored Post',
 		id: 'tier-sponsored',
 		href: '/post-a-job',
-		price: 'Starting at $15',
+		price: 'Starting at $50',
 		description:
 			'Sponsored posts sit at the top of the results in order from highest bid to lowest.',
-		features: ['Sponsorship lasts for a 7 days'],
+		features: [
+			'Sponsorship lasts for the lifetime of the post',
+			'Cumulative payments determine post order',
+		],
 		featured: false,
 		cta: 'Sponsor post',
 	},
+	// {
+	// 	name: 'Instagram',
+	// 	id: 'tier-instagram',
+	// 	href: '/post-a-job',
+	// 	price: '$500',
+	// 	description:
+	// 		"Have your post shared via our instagram account. It's the fastest and most direct way to reach candidates in our network.",
+	// 	features: ['Posts stay up until role is filled'],
+	// 	featured: false,
+	// 	cta: 'Post on Instagram',
+	// },
 	{
-		name: 'Instagram',
-		id: 'tier-instagram',
+		name: 'Active Search (NYC Private Practices Only)',
+		id: 'tier-activeSearch',
 		href: '/post-a-job',
-		price: '$500',
+		price: '$1,500',
 		description:
-			"Have your post shared via our instagram account. It's the fastest and most direct way to reach candidates in our network.",
-		features: ['Posts stay up until role is filled'],
-		featured: false,
-		cta: 'Post on Instagram',
-	},
-	{
-		name: 'Recruiting Services',
-		id: 'tier-recruiting',
-		href: '/recruiting',
-		price: 'Plan dependent',
-		description:
-			'Personalized recruiting services at market leading low prices.',
+			'The fastest way possible to hire. Get a list of qualified doctors that want to work for you.',
 		features: [
-			'Targeted candidate search',
-			'Access to our high quality network of doctors',
-			'Low risk pricing',
+			'Full refund if no applicants within 60 days',
+			'Practices get 1 deal-breaker requirement',
+			'Actively fill a role rather than passively wait for candidates to find you',
 		],
 		featured: true,
-		cta: 'Learn more',
+		cta: 'Get Started',
 	},
 ];
 
@@ -63,13 +71,13 @@ export default function Example() {
 						Pricing
 					</h2> */}
 					<p className='mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl'>
-						Product Offerings
+						Pricing
 					</p>
 				</div>
-				<p className='mt-6 max-w-2xl text-xl leading-8 text-gray-600'>
+				{/* <p className='mt-6 max-w-2xl text-xl leading-8 text-gray-600'>
 					No matter your hiring challenges, we have a solution.
-				</p>
-				<div className='isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-4'>
+				</p> */}
+				<div className='isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
 					{tiers.map((tier) => (
 						<div
 							key={tier.id}

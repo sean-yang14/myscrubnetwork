@@ -10,7 +10,7 @@ export default function Header() {
 				</h2>
 				<p className='mt-6 text-lg leading-8 text-gray-600'>
 					We&#39;re focused on creating the best candidate searching experience
-					for practices and the best job searching experience for doctors.
+					for practices.
 				</p>
 			</div>
 		</div>

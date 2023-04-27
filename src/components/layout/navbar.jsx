@@ -19,7 +19,7 @@ export default function Example() {
 		jobs: false,
 		practices: false,
 		contact: false,
-		recruiting: false,
+		// recruiting: false,
 		events: false,
 	};
 	const [current, setCurrent] = useState({
@@ -136,7 +136,7 @@ export default function Example() {
 									>
 										For Practices
 									</Link>
-									<Link
+									{/* <Link
 										href='/recruiting'
 										className={classNames(
 											current.recruiting
@@ -148,7 +148,7 @@ export default function Example() {
 										name='recruiting'
 									>
 										Recruiting
-									</Link>
+									</Link> */}
 									<Link
 										href='/events'
 										className={classNames(
@@ -293,7 +293,7 @@ export default function Example() {
 							>
 								For Practices
 							</Disclosure.Button>
-							<Disclosure.Button
+							{/* <Disclosure.Button
 								as='a'
 								href='/recruiting'
 								onClick={handleClick}
@@ -306,7 +306,7 @@ export default function Example() {
 								name='contract'
 							>
 								Recruiting
-							</Disclosure.Button>
+							</Disclosure.Button> */}
 							<Disclosure.Button
 								as='a'
 								href='/events'

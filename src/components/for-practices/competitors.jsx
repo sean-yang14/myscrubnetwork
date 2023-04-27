@@ -2,26 +2,50 @@ const people = [
 	{
 		title: 'Free Job Posts',
 		scrubNetwork: 'Yes',
-		indeed: 'Yes, but with limited reach',
-		linkedIn: 'Yes, but only 1 post for 21 days',
+		indeed: 'Yes',
 		zipRecruiter: 'No',
+		dentistJobConnect: 'No',
 		dentalPost: 'No',
 	},
 	{
 		title: 'Starting Price',
-		scrubNetwork: '',
-		indeed: '',
-		linkedIn: '',
+		scrubNetwork: 'Free',
+		indeed: 'Free',
 		zipRecruiter: '$299 per month',
-		dentalPost: '$189 per post',
+		dentistJobConnect: '$995 per post, with a 60 day expiration',
+		dentalPost: '$119 per post, with a 30 day expiration',
+	},
+	{
+		title: 'Facilitate Referral Bonuses',
+		scrubNetwork: 'Yes',
+		indeed: 'No',
+		zipRecruiter: 'No',
+		dentistJobConnect: 'No',
+		dentalPost: 'No',
+	},
+	{
+		title: 'Direct Reachout (Social Media)',
+		scrubNetwork: 'Yes',
+		indeed: 'No',
+		zipRecruiter: 'No',
+		dentistJobConnect: 'Yes',
+		dentalPost: 'No',
+	},
+	{
+		title: 'Actively Finds Qualified Applicants',
+		scrubNetwork: 'Yes',
+		indeed: 'No',
+		zipRecruiter: 'No',
+		dentistJobConnect: 'No',
+		dentalPost: 'No',
 	},
 	// {
-	// 	title: 'Starting Sponsorship Price',
-	// 	scrubNetwork: '< $2 per post per day',
-	// 	indeed: '$5 per post per day',
-	// 	linkedIn: '$5 per post per day',
-	// 	zipRecruiter: '',
-	// 	dentalPost: '',
+	// 	title: 'Highest Price',
+	// 	scrubNetwork: '$1,500',
+	// 	indeed: 'No Ceiling',
+	// 	zipRecruiter: 'No Ceiling',
+	// 	dentistJobConnect: '$329 for 30 days',
+	// 	dentalPost: '$2,495 for 180 days',
 	// },
 ];
 
@@ -71,7 +95,7 @@ export default function Competitors() {
 										scope='col'
 										className='py-3.5 px-3 text-left text-lg font-semibold text-gray-900 text-center w-1/6 text-white'
 									>
-										LinkedIn
+										Dentist Job Connect
 									</th>
 									<th
 										scope='col'
@@ -87,7 +111,7 @@ export default function Competitors() {
 										<td className='whitespace-normal py-4 px-3 text-lg font-semibold text-gray-900 text-center'>
 											{person.title}
 										</td>
-										<td className='whitespace-normal py-4 px-3 text-base text-gray-700 text-center'>
+										<td className='whitespace-normal py-4 px-3 text-lg text-indigo-600 font-semibold text-center'>
 											{person.scrubNetwork}
 										</td>
 										<td className='whitespace-normal py-4 px-3 text-base text-gray-700 text-center'>
@@ -97,7 +121,7 @@ export default function Competitors() {
 											{person.zipRecruiter}
 										</td>
 										<td className='whitespace-normal py-4 px-3 text-base text-gray-700 text-center'>
-											{person.linkedIn}
+											{person.dentistJobConnect}
 										</td>
 										<td className='whitespace-normal py-4 px-3 text-base text-gray-700 text-center'>
 											{person.dentalPost}

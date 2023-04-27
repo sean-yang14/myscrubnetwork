@@ -6,7 +6,7 @@ import {
 
 const features = [
 	{
-		name: 'Reach 100+ Dentists in the NYC Area',
+		name: 'Reach NYC Dentists and Specialists',
 		description:
 			"Our network includes high quality dentists from a variety of backgrounds. So whatever you're looking for, you can find it here.",
 		icon: UserGroupIcon,
@@ -18,9 +18,9 @@ const features = [
 		icon: CreditCardIcon,
 	},
 	{
-		name: 'Made for Dentists',
+		name: 'Built for Speed',
 		description:
-			'Most job boards are designed for corporate jobs. Our products solve problems that are unique to dental practices.',
+			'Our products are built to find qualified candidates faster than any other site through the use of incentives and direct reach outs.',
 		icon: WrenchIcon,
 	},
 ];
@@ -34,8 +34,8 @@ export default function Features() {
 						Why Post on Scrub Network
 					</h2>
 					<p className='mt-6 text-lg leading-8 text-gray-600'>
-						Our posts reach qualified doctors faster than any other site. We
-						also offer market leading affordable prices for our services.
+						We help you reach the right candidates faster than ever before, and
+						we do it at market leading prices.
 					</p>
 				</div>
 				<div className='mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none'>

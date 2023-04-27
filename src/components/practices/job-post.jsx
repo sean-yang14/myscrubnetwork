@@ -38,7 +38,7 @@ export default function Listing({ formEntries }) {
 		price: '',
 		bid: '',
 		weeks: '',
-		instagram: false,
+		listOfApplicants: false,
 	};
 
 	const [formData, setFormData] = useState({
@@ -71,7 +71,7 @@ export default function Listing({ formEntries }) {
 	const handleCheckbox = (e) => {
 		setFormData((prev) => ({
 			...prev,
-			[e.target.name]: !formData.instagram,
+			[e.target.name]: !formData.listOfApplicants,
 		}));
 	};
 
@@ -366,11 +366,12 @@ export default function Listing({ formEntries }) {
 										</div>
 										<div className='sm:col-span-3'>
 											<h3 className='text-lg font-medium leading-6 text-gray-900'>
-												Post on Instagram
+												Fill Open Roles Fast. I Want an Active Search
 											</h3>
 											<p className='text-base leading-6 text-gray-900'>
-												Reach dentists and their network directly through social
-												media.
+												We actively work our network, putting boots on the
+												ground, to find you qualified dentists that want to work
+												at your practice.
 											</p>
 											<div className='mt-4'>
 												<fieldset>
