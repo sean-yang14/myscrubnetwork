@@ -37,7 +37,7 @@ export default function Listing({ formEntries }) {
 		schedule: '',
 		price: '',
 		bid: '',
-		weeks: '',
+		// weeks: '',
 		listOfApplicants: false,
 	};
 
@@ -316,7 +316,7 @@ export default function Listing({ formEntries }) {
 											</p>
 											<div className='mt-4'>
 												<div className='flex space-x-4'>
-													<div className='w-1/2'>
+													<div className='w-full'>
 														<label
 															htmlFor='bid'
 															className='block text-sm font-medium leading-6 text-gray-900'
@@ -336,12 +336,12 @@ export default function Listing({ formEntries }) {
 																value={formData.bid}
 																onChange={handleChange}
 																className='block w-full  rounded-md border-0 py-1.5 pl-7 pr-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
-																placeholder='Starting bid $25'
+																placeholder='Bids start at $50'
 																aria-describedby='sponsor-bid'
 															/>
 														</div>
 													</div>
-													<div className='w-1/2'>
+													{/* <div className='w-1/2'>
 														<label
 															htmlFor='weeks'
 															className='block text-sm font-medium leading-6 text-gray-900'
@@ -360,29 +360,29 @@ export default function Listing({ formEntries }) {
 																aria-describedby='sponsor-weeks'
 															/>
 														</div>
-													</div>
+													</div> */}
 												</div>
 											</div>
 										</div>
 										<div className='sm:col-span-3'>
 											<h3 className='text-lg font-medium leading-6 text-gray-900'>
-												Fill Open Roles Fast. I Want an Active Search
+												Fill open roles fast with Active Search
 											</h3>
 											<p className='text-base leading-6 text-gray-900'>
 												We actively work our network, putting boots on the
-												ground, to find you qualified dentists that want to work
-												at your practice.
+												ground, to find you qualified professionals that want to
+												work at your practice.
 											</p>
 											<div className='mt-4'>
 												<fieldset>
-													<legend className='sr-only'>Instagram</legend>
+													<legend className='sr-only'>Active Search</legend>
 													<div className='space-y-5'>
 														<div className='relative flex items-start'>
 															<div className='flex h-6 items-center'>
 																<input
-																	id='instagram'
-																	aria-describedby='instagram-offering-option'
-																	name='instagram'
+																	id='active'
+																	aria-describedby='active-search-offering-option'
+																	name='active'
 																	type='checkbox'
 																	value={true}
 																	onChange={handleCheckbox}
@@ -392,10 +392,10 @@ export default function Listing({ formEntries }) {
 															</div>
 															<div className='ml-3 text-sm leading-6'>
 																<label
-																	htmlFor='instagram'
+																	htmlFor='active'
 																	className='font-medium text-gray-900'
 																>
-																	Yes, I want an Instagram Post
+																	Yes, I want the Active Search offering
 																</label>
 																{/* <p
 																	id='comments-description'
@@ -415,7 +415,7 @@ export default function Listing({ formEntries }) {
 
 								<div className='pt-8'>
 									<h3 className='text-lg font-medium leading-6 text-gray-900'>
-										Add Post Information
+										Add post information
 									</h3>
 									<div className='mt-6 grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2 lg:grid-cols-3'>
 										{formEntries.map((entry, i) => {

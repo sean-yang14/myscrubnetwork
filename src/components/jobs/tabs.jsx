@@ -4,7 +4,7 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(' ');
 }
 
-export default function Tabs({ tabs, handleClick }) {
+export default function Tabs({ tabs, handleClick, handleChange }) {
 	return (
 		<MainCard>
 			<div className='my-4 sm:pb-2'>
@@ -12,7 +12,7 @@ export default function Tabs({ tabs, handleClick }) {
 					Specialty
 				</h3>
 				{/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
-				{/* <div className='hidden'>
+				<div className='block sm:hidden'>
 					<label htmlFor='tabs' className='sr-only'>
 						Select a tab
 					</label>
@@ -21,13 +21,14 @@ export default function Tabs({ tabs, handleClick }) {
 						name='tabs'
 						className='block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500'
 						defaultValue={tabs.find((tab) => tab.current).id}
+						onChange={handleChange}
 					>
 						{tabs.map((tab) => (
-							<option key={tab.name}>{tab.name}</option>
+							<option key={tab.id}>{tab.name}</option>
 						))}
 					</select>
-				</div> */}
-				<div className='block border-b-2 border-gray-200 pb-2'>
+				</div>
+				<div className='hidden sm:block border-b-2 border-gray-200 pb-2'>
 					<nav className='flex space-x-4' aria-label='Tabs'>
 						{tabs.map((tab) => (
 							<button

@@ -6,9 +6,9 @@ import {
 
 const features = [
 	{
-		name: 'Reach NYC Dentists and Specialists',
+		name: 'Reach NYC Dental Professionals',
 		description:
-			"Our network includes high quality dentists from a variety of backgrounds. So whatever you're looking for, you can find it here.",
+			"Our network includes high quality dental professionals from a variety of backgrounds. So whatever you're looking for, you can find it here.",
 		icon: UserGroupIcon,
 	},
 	{

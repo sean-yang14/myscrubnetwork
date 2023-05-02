@@ -11,7 +11,7 @@ const tiers = [
 		features: [
 			'Unlimited posts',
 			'Posts stay up until role is filled',
-			'Posts with a referral bonus of at least $300 get shared directly with dentists',
+			'Posts with a referral bonus of at least $300 are actively shared with our network',
 		],
 		featured: false,
 		cta: 'Create post',
@@ -42,12 +42,12 @@ const tiers = [
 	// 	cta: 'Post on Instagram',
 	// },
 	{
-		name: 'Active Search (NYC Private Practices Only)',
+		name: 'Active Search (NYC Area Private Practices Only)',
 		id: 'tier-activeSearch',
 		href: '/post-a-job',
 		price: '$1,500',
 		description:
-			'The fastest way possible to hire. Get a list of qualified doctors that want to work for you.',
+			'The fastest way possible to hire dentists. Get a list of qualified doctors that want to work for you.',
 		features: [
 			'Full refund if no applicants within 60 days',
 			'Practices get 1 deal-breaker requirement',

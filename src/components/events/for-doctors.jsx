@@ -8,14 +8,16 @@ export default function ForDoctors() {
 				<div className='mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-y-8'>
 					<div className='lg:col-end-1 lg:w-full lg:max-w-lg lg:pb-8'>
 						<h2 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
-							For Doctors
+							For Dental Professionals
 						</h2>
 						<p className='mt-6 text-xl leading-8 text-gray-600'>
 							The vision of this company from the start was to build a true
 							community for healthcare providers, hence the name Scrub Network.
-							If you&#39;re interested in attending our events let us know via
-							the contact form, and we&#39;ll make sure that you are added to
-							our distribution list for event sign ups.
+							If you&#39;re interested in building real relationships with
+							amazing people in your industry, then you should become a part of
+							Scrub Network. Just let us know via the contact form that
+							you&#39;d like to join, and we&#39;ll make sure that you are added
+							to our distribution list for future events.
 						</p>
 						{/* <p className='mt-6 text-base leading-7 text-gray-600'>
 							Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
@@ -27,7 +29,7 @@ export default function ForDoctors() {
 								href='/contact-us'
 								className='rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
 							>
-								Contact Us <span aria-hidden='true'>&rarr;</span>
+								Join Now <span aria-hidden='true'>&rarr;</span>
 							</Link>
 						</div>
 					</div>

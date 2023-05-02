@@ -31,6 +31,14 @@ export default function Jobs() {
     })
   }
 
+  const handleChange = (e) => {
+    const matchedTab = tabs.find((tab) => tab.name === e.target.value)
+    setSelectedTab({
+      ...resetTabs,
+      [matchedTab.id]:true
+    })
+  }
+
   const [selectedType, setSelectedType] = useState({
     private: true,
     dso: false,
@@ -72,7 +80,7 @@ export default function Jobs() {
 
   return (
     <>
-      <Tabs tabs={tabs} handleClick={handleClick}/>
+      <Tabs tabs={tabs} handleClick={handleClick} handleChange={handleChange}/>
       <PracticeToggle tabs={toggle} handleClick={handleToggleClick} />
       {
         selectedTab.general === true ?

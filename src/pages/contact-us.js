@@ -257,13 +257,13 @@ export default function Contact() {
                     </div>
                     <h3 className="text-lg font-medium text-white">Contact information</h3>
                     <dl className="mt-8 space-y-6">
-                      <dt>
+                      {/* <dt>
                         <span className="sr-only">Phone number</span>
                       </dt>
                       <dd className="flex text-sm text-indigo-50">
                         <PhoneIcon className="h-6 w-6 flex-shrink-0 text-indigo-200" aria-hidden="true" />
                         <span className="ml-3 text-base">+1 (847) 313-0042</span>
-                      </dd>
+                      </dd> */}
                       <dt>
                         <span className="sr-only">Email</span>
                       </dt>
