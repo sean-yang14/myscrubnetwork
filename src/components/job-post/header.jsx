@@ -1,16 +1,16 @@
 export default function Header() {
 	return (
-		<div className='pt-24 pb-14 px-6 sm:pt-32 sm:pb-16 lg:px-8'>
+		<div className='py-24 px-6 sm:py-32 lg:px-8'>
 			<div className='mx-auto max-w-2xl text-center'>
 				<p className='text-base font-semibold leading-7 text-indigo-600'>
-					A Better Way to Connect
+					A Better Job Board
 				</p>
 				<h2 className='mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
-					Events
+					Post a Job
 				</h2>
 				<p className='mt-6 text-lg leading-8 text-gray-600'>
-					We&#39;re building a community for dental professionals to connect,
-					grow, have fun, and make an impact.
+					We help you reach the right candidates faster than ever before. Fill
+					out the form below to get started.
 				</p>
 			</div>
 		</div>

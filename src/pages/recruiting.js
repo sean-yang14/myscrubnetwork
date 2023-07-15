@@ -4,7 +4,7 @@ import CallToAction from '@/components/recruiting/cta'
 import Hero from '@/components/recruiting/hero'
 import Offerings from '@/components/recruiting/offerings'
 import ValueProps from '@/components/recruiting/value-props'
-import Footer from '@/components/for-practices/footer'
+import Footer from '@/components/layout/footer'
 import Link from 'next/link'
 
 export default function Recruiting() {

@@ -1,5 +1,12 @@
 import MainLayout from "@/components/layout/main-layout"
-import General from "@/components/jobs/general"
+import MainCard from '@/components/layout/main-card';
+import General from "@/components/jobs/specialty-pages/general"
+import Endo from "@/components/jobs/specialty-pages/endo";
+import OralSurgeon from "@/components/jobs/specialty-pages/oral-surgeon";
+import Ortho from "@/components/jobs/specialty-pages/ortho";
+import Peds from "@/components/jobs/specialty-pages/peds";
+import Prosth from "@/components/jobs/specialty-pages/prosth";
+import Perio from "@/components/jobs/specialty-pages/perio";
 import Footer from '@/components/layout/footer'
 import Tabs from "@/components/jobs/tabs";
 import { useState } from "react";
@@ -8,19 +15,31 @@ import PracticeToggle from "@/components/jobs/practice-toggle";
 export default function Jobs() {
   const [selectedTab, setSelectedTab] = useState({
     general: true,
-    // pediatrics: false,
+    endodontist: false,
+    oralSurgeon: false,
+    orthodontist: false,
+    pediatric: false,
+    // prosthodontist: false,
     // hygenists: false
   })
 
   const resetTabs = {
     general: false,
-    // pediatrics: false,
+    endodontist: false,
+    oralSurgeon: false,
+    orthodontist: false,
+    pediatric: false,
+    // prosthodontist: false,
     // hygenists: false
   }
   
   const tabs = [
     { name: 'General', id:'general', current: selectedTab.general },
-    // { name: 'Pediatrics',id:'pediatrics', current: selectedTab.pediatrics },
+    { name: 'Endodontist',id:'endodontist', current: selectedTab.endodontist },
+    { name: 'Oral Surgeon',id:'oralSurgeon', current: selectedTab.oralSurgeon },
+    { name: 'Orthodontist',id:'orthodontist', current: selectedTab.orthodontist },
+    { name: 'Pediatric',id:'pediatric', current: selectedTab.pediatric },
+    // { name: 'Prosthodontist',id:'prosthodontist', current: selectedTab.prosthodontist },
     // { name: 'Hygenists', id:'hygenists', current: selectedTab.hygenists },
   ];
 
@@ -39,53 +58,26 @@ export default function Jobs() {
     })
   }
 
-  const [selectedType, setSelectedType] = useState({
-    private: true,
-    dso: false,
-  })
-
-  const [practiceTypeChanged, setPracticeTypeChanged] = useState(false)
-
-  const resetToggle = {
-    private: false,
-    dso: false,
-  }
-
-  const toggle = [
-    { name: 'Private', id: 'private', current: selectedType.private },
-    { name: 'DSO', id: 'dso', current: selectedType.dso },
-  ];
-
-  const handleToggleClick = (e) => {
-    setSelectedType({
-      ...resetToggle,
-      [e.target.id]:true
-    })
-    setPracticeTypeChanged(true)
-  }
-
-  // To search using loop
-  // for (const key in selectedType) {
-  //   if (selectedType(key)) {
-
-  //   }
-  // }
-
-  let type = ''
-  if (selectedType.private) {
-    type = 'private'
-  } else {
-    type = 'dso'
-  }
-
   return (
     <>
       <Tabs tabs={tabs} handleClick={handleClick} handleChange={handleChange}/>
-      <PracticeToggle tabs={toggle} handleClick={handleToggleClick} />
       {
         selectedTab.general === true ?
-        <General practiceType={type} practiceTypeChanged={practiceTypeChanged} setPracticeTypeChanged={setPracticeTypeChanged}/> :
-        <h1>TBD</h1>
+        <General /> :selectedTab.endodontist=== true ?
+        <Endo /> : selectedTab.oralSurgeon=== true ?
+        <OralSurgeon /> : selectedTab.orthodontist=== true ?
+        <Ortho /> : selectedTab.pediatric=== true ?
+        <Peds /> : 
+        // selectedTab.prosthodontist=== true ?
+        // <Prosth /> : 
+        selectedTab.perio=== true ?
+        <Perio /> :
+          <MainCard>
+
+          <h1>Sorry, we currently do not have any jobs in this specialty</h1>
+          <p>Please check back soon!</p>
+        </MainCard>
+
       }
       <Footer />
     </>

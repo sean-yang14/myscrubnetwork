@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import NewListing from './new-listing';
 import UpdateListing from './update-listing';
-import Rewards from './rewards';
 
 const formEntries = [
 	{
@@ -29,14 +28,6 @@ const formEntries = [
 		aria: 'practice website',
 	},
 	{
-		label: 'Address',
-		type: 'text',
-		name: 'address',
-		id: 'address',
-		placeholder: '2928 41st Ave',
-		aria: 'practice address',
-	},
-	{
 		label: 'City',
 		type: 'text',
 		name: 'city',
@@ -53,35 +44,28 @@ const formEntries = [
 		aria: 'practice state',
 	},
 	{
-		label: 'Zip Code',
+		label: 'Partner',
 		type: 'text',
-		name: 'zip',
-		id: 'zip',
-		placeholder: '11101',
-		aria: 'practice zip code',
+		name: 'partner',
+		id: 'partner',
+		placeholder: 'Recruiting firm name',
+		aria: 'partnership counterparty',
 	},
 	{
-		label: 'Salary Range',
-		type: 'text',
-		name: 'salary',
-		id: 'salary',
-		placeholder: '$100,000',
-		aria: 'salary range',
+		label: 'Ranking',
+		type: 'number',
+		name: 'ranking',
+		id: 'ranking',
+		placeholder: 'Number used in rankings',
+		aria: 'ranking',
 	},
 	{
-		label: 'Salary Interval',
-		type: 'text',
-		name: 'interval',
-		id: 'interval',
-		placeholder: 'year',
-	},
-	{
-		label: 'Schedule',
-		type: 'text',
-		name: 'schedule',
-		id: 'schedule',
-		placeholder: 'Full Time',
-		aria: 'dentist schedule',
+		label: 'Referral Bonus',
+		type: 'number',
+		name: 'referralBonus',
+		id: 'referralBonus',
+		placeholder: '$xxxx',
+		aria: 'referral bonus amount',
 	},
 ];
 
@@ -97,14 +81,13 @@ export default function DashboardContent({ startObj, children, id }) {
 	const tabs = [
 		{ name: 'New Listing', id: 'new', current: selected.new },
 		{ name: 'Update Listing', id: 'update', current: selected.update },
-		{ name: 'Users', id: 'users', current: selected.users },
 	];
 
 	const handleTabSelected = (e) => {
 		setSelected(() => ({
 			new: false,
 			update: false,
-			users: false,
+
 			[e.target.id]: true,
 		}));
 	};
@@ -146,8 +129,6 @@ export default function DashboardContent({ startObj, children, id }) {
 								<NewListing formEntries={formEntries} />
 							) : selected.update ? (
 								<UpdateListing formEntries={formEntries} id={id} />
-							) : selected.users ? (
-								<Rewards formEntries={formEntries} />
 							) : (
 								<NewListing formEntries={formEntries} />
 							)}

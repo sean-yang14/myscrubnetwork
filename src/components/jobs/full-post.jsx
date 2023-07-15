@@ -1,6 +1,6 @@
 import { XMarkIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import Badges from './badges';
+// import Badges from './badges';
 import Image from 'next/image';
 
 function classNames(...classes) {
@@ -45,7 +45,6 @@ export default function FullPost({ selectedJob, screen, handleClick }) {
 						</div>
 					)} */}
 					<div className='mt-8 min-w-0 flex-1 block text-left'>
-						<Badges tier={selectedJob?.tier} />
 						<div className='flex items-center'>
 							<h1 className='truncate text-2xl font-bold text-gray-900'>
 								{selectedJob?.title}

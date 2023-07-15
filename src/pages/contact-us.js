@@ -3,6 +3,7 @@ import {useState} from 'react'
 import axios from 'axios'
 import MainCard from '@/components/layout/main-card'
 import MainLayout from '@/components/layout/main-layout'
+import Footer from '@/components/layout/footer'
 
 export default function Contact() {
 
@@ -144,14 +145,24 @@ export default function Contact() {
 
   return (
     <MainCard>
+      {/* Header */}
+      <div className='pt-24 pb-14 px-6 sm:pt-32 sm:pb-16 lg:px-8'>
+        <div className='mx-auto max-w-2xl text-center'>
+          <p className='text-base font-semibold leading-7 text-indigo-600'>
+          We&#39;re Here for You
+          </p>
+          <h2 className='mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
+            Contact Us
+          </h2>
+          <p className='mt-6 text-lg leading-8 text-gray-600'>
+            Fill out the contact form or send an email. We&#39;ll get back to you as early as possible.
+          </p>
+        </div>
+		  </div>
+      {/* Contact form */}
       <div>
         <div className='relative mx-auto max-w-5xl md:px-8 xl:px-0'>
           <div className='pt-10 pb-16'>
-            <div className='px-4 sm:px-6 md:px-0'>
-							<h1 className='text-3xl font-bold tracking-tight text-gray-900'>
-								Contact Us
-							</h1>
-						</div>
             <div className="mx-auto py-12">
               <div className="relative bg-white shadow-xl">
                 <h2 className="sr-only">Contact us</h2>
@@ -284,6 +295,7 @@ export default function Contact() {
                         </label>
                         <div className="mt-1">
                           <input
+                            required
                             type="text"
                             name="firstName"
                             id="firstName"
@@ -300,6 +312,7 @@ export default function Contact() {
                         </label>
                         <div className="mt-1">
                           <input
+                            required
                             type="text"
                             name="lastName"
                             id="lastName"
@@ -311,11 +324,13 @@ export default function Contact() {
                         </div>
                       </div>
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-900">
+                        <label 
+                        htmlFor="email" className="block text-sm font-medium text-gray-900">
                           Email
                         </label>
                         <div className="mt-1">
                           <input
+                            required
                             type="email"
                             name="email"
                             id="email"
@@ -354,6 +369,7 @@ export default function Contact() {
                         </label>
                         <div className="mt-1">
                           <input
+                            required
                             type="text"
                             name="subject"
                             id="subject"
@@ -368,12 +384,13 @@ export default function Contact() {
                           <label htmlFor="message" className="block text-sm font-medium text-gray-900">
                             Message
                           </label>
-                          <span id="message-max" className="text-sm text-gray-500">
+                          <span id="message-max"className="text-sm text-gray-500">
                             Max. 500 characters
                           </span>
                         </div>
                         <div className="mt-1">
                           <textarea
+                            required
                             name="message"
                             id="message"
                             value={inputs.message}
@@ -414,6 +431,7 @@ export default function Contact() {
           </div>
         </div>
       </div>
+      <Footer />
     </MainCard>
   )
 }

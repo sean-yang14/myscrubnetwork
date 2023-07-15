@@ -1,7 +1,6 @@
 import { PlusIcon, MinusIcon } from '@heroicons/react/20/solid';
 import { useState } from 'react';
 import DirectoryCard from '@/components/jobs/directory-card';
-import FullPost from '@/components/jobs/full-post';
 import ModalJob from '@/components/jobs/job-modal';
 import StateDropdown from '@/components/jobs/state-dropdown';
 import MainCard from '@/components/layout/main-card';
@@ -19,17 +18,18 @@ export default function MainBody({
 	totalPages,
 	stateSelected,
 	handleStateChange,
-	handleNextPage,
+	handleMoreJobs,
 	handlePrevPage,
 	listings,
 	selectedJob,
-	currentPage,
+	currentListingsCount,
 	totalListings,
 	cityList,
 	setCitiesSelected,
 	setCitiesSubmitted,
 	currentCard,
-	practiceType,
+	setCurrentListingsCount,
+	specialtyTab,
 }) {
 	const [showCities, setShowCities] = useState(false);
 
@@ -40,20 +40,14 @@ export default function MainBody({
 	return (
 		<>
 			<MainCard>
-				<ModalJob
-					handleClick={handleModalClose}
-					open={open}
-					setOpen={setOpen}
-					selectedJob={selectedJob}
-				/>
-				<div className='flex min-w-0 flex-1 flex-col overflow-hidden'>
+				<div className='flex min-w-0 flex-1 flex-col'>
 					{/* State selector */}
 
 					<div className='mt-2 md:mt-4 flex space-x-8 justify-center items-center'>
 						<StateDropdown
 							selected={stateSelected}
 							handleChange={handleStateChange}
-							practiceType={practiceType}
+							specialtyTab={specialtyTab}
 						/>
 						<div className='flex space-x-4 justify-center items-center'>
 							<div className='block text-base font-medium text-center text-indigo-700'>
@@ -90,10 +84,10 @@ export default function MainBody({
 						)}
 
 					{/* Start of content */}
-					<div className='relative z-0 flex flex-1 overflow-hidden mt-4 md:mt-8 md:grid md:grid-cols-2'>
+					<div className='relative z-0 flex flex-1 mt-4 md:mt-8'>
 						{/* All posts */}
-						<main className='relative z-0 flex-1 overflow-y-auto focus:outline-none'>
-							<article className='h-screen overflow-y-auto xl:order-first md:flex md:flex-col'>
+						<main className='relative z-0 flex-1 focus:outline-none'>
+							<article className='md:flex md:flex-col'>
 								{/* Job list */}
 								<p className='text-sm font-medium mb-4 text-gray-900'>
 									Total jobs: {totalListings}
@@ -106,51 +100,40 @@ export default function MainBody({
 										{listings?.map((job, i) => {
 											return (
 												<li key={i} id={i} onClick={handleClick}>
-													<DirectoryCard
-														job={job}
-														current={currentCard[i] ? true : false}
-													/>
+													<DirectoryCard job={job} />
 												</li>
 											);
 										})}
 									</ul>
 									{/* Page numbers */}
 									<nav
-										className='flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6'
+										className='flex items-center justify-between border-t border-gray-200 bg-white py-3'
 										aria-label='Pagination'
 									>
-										<div className='hidden sm:block'>
+										{/* show current listing count but doesn't update correctly when cities selected - fix */}
+										<div className='hidden sm:invisible sm:block'>
 											<p className='text-sm text-gray-700'>
-												Showing page{' '}
-												<span className='font-medium'>{currentPage}</span> of{' '}
-												<span className='font-medium'>{totalPages}</span> pages
+												Showing{' '}
+												<span className='font-medium'>
+													{currentListingsCount}
+												</span>{' '}
+												of <span className='font-medium'>{totalListings}</span>{' '}
+												total jobs
 											</p>
 										</div>
 										<div className='flex flex-1 justify-between sm:justify-end'>
 											<button
-												onClick={handlePrevPage}
-												className='relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed'
-												disabled={currentPage === 1}
-											>
-												Previous
-											</button>
-											<button
-												onClick={handleNextPage}
+												onClick={handleMoreJobs}
 												className='relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed'
-												disabled={currentPage === totalPages}
+												disabled={currentListingsCount === totalListings}
 											>
-												Next
+												More Jobs
 											</button>
 										</div>
 									</nav>
 								</div>
 							</article>
 						</main>
-
-						{/* Full post */}
-						<article className='overflow-y-auto sticky top-0 h-screen hidden md:order-last md:flex md:flex-col'>
-							<FullPost selectedJob={selectedJob} />
-						</article>
 					</div>
 				</div>
 			</MainCard>

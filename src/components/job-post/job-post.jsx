@@ -4,7 +4,11 @@ import { CheckIcon } from '@heroicons/react/24/outline';
 import { useUser } from '@/login/user';
 import dynamic from 'next/dynamic';
 
-// const ReactQuill = dynamic(import('react-quill'), { ssr: false });
+const ReactQuill = dynamic(import('react-quill'), { ssr: false });
+
+function classNames(...classes) {
+	return classes.filter(Boolean).join(' ');
+}
 
 export default function Listing({ formEntries }) {
 	const [validations, setValidations] = useState({
@@ -38,6 +42,17 @@ export default function Listing({ formEntries }) {
 	const [formData, setFormData] = useState({
 		...newEntry,
 	});
+
+	// const [fullDescription, setFullDescription] = useState('');
+
+	// const handleFullDescriptionChange = (text) => {
+	// 	setFullDescription(text);
+	// };
+	// const [compensationDetails, setCompensationDetails] = useState('');
+
+	// const handleCompensationDetailsChange = (text) => {
+	// 	setCompensationDetails(text);
+	// };
 
 	const handleServerResponse = (ok, msg) => {
 		if (ok) {
@@ -105,7 +120,7 @@ export default function Listing({ formEntries }) {
 			return;
 		}
 
-		if (formData.bid < 50) {
+		if (formData.bid < 50 && formData.bid !== '') {
 			setValidations((prev) => ({
 				postDetails: 'Check bid for sponsored post',
 				sponsorBid: 'Sponsorship bid must be at least $50',
@@ -128,9 +143,9 @@ export default function Listing({ formEntries }) {
 
 		const formDataCopy = {
 			...formData,
+			// compensationDetails,
+			// fullDescription,
 		};
-
-		console.log(formDataCopy);
 
 		axios({
 			method: 'POST',
@@ -146,6 +161,11 @@ export default function Listing({ formEntries }) {
 			.catch((error) => {
 				handleServerResponse(false, error.response.data.error);
 			});
+
+		setValidations((prev) => ({
+			postDetails: '',
+			sponsorBid: '',
+		}));
 	};
 
 	if (status.submitted) {
@@ -195,12 +215,15 @@ export default function Listing({ formEntries }) {
 
 	return (
 		<>
-			<main className='flex-1'>
-				<div className='relative mx-auto max-w-5xl md:px-8 xl:px-0'>
+			<main
+				id='job-form'
+				className='mx-auto max-w-7xl px-6 lg:flex lg:px-8 border-black rounded-md shadow-lg'
+			>
+				<div className='w-full'>
 					<div className='pt-10 pb-16'>
-						<div className='px-4 sm:px-6 md:px-0 flex space-x-4 items-baseline'>
+						<div className='flex flex-col space-y-2 lg:flex-row lg:space-y-0 lg:space-x-4 items-baseline'>
 							<h1 className='text-3xl font-bold tracking-tight text-gray-900'>
-								Job Post
+								Job Post Form for Private Practices
 							</h1>
 							<h3 className='text-lg font-medium leading-6 text-gray-900'>
 								(Stays up until role is filled)
@@ -218,7 +241,7 @@ export default function Listing({ formEntries }) {
 									</h3>
 									<p className='text-base leading-6 text-gray-900'>
 										Contact information will not be shared with candidates
-										unless added to the job post below.
+										unless added to the job description.
 									</p>
 									<div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
 										<div className='sm:col-span-3'>
@@ -454,6 +477,7 @@ export default function Listing({ formEntries }) {
 											);
 										})}
 									</div>
+									{/* textarea code */}
 									<div className='grid grid-cols-2 gap-x-8'>
 										<div className='mt-6'>
 											<label
@@ -488,17 +512,60 @@ export default function Listing({ formEntries }) {
 											/>
 										</div>
 									</div>
-									{validations.postDetails && (
-										<h4 className='mt-1 mb-2 text-sm text leading-6 text-red-500'>
-											{`Error: ${validations.postDetails}`}
-										</h4>
-									)}
+
+									{/* ReactQuill code */}
+									{/* <div className='mt-6 grid grid-cols-1 md:grid-cols-2 space-y-24 space-x-0 md:space-y-0 md:space-x-8 mb-8'>
+										<div>
+											<label
+												htmlFor='fullDescription'
+												className='block text-sm font-medium text-gray-700'
+											>
+												Full Description
+											</label>
+											<ReactQuill
+												id='fullDescription'
+												name='fullDescription'
+												className='mt-1 w-full rounded-md h-32 md:h-36'
+												theme='snow'
+												value={fullDescription}
+												onChange={handleFullDescriptionChange}
+												defaultValue={''}
+											/>
+										</div>
+										<div>
+											<label
+												htmlFor='compensationDetails'
+												className='block text-sm font-medium text-gray-700'
+											>
+												Compensation Details
+											</label>
+
+											<ReactQuill
+												id='compensationDetails'
+												name='compensationDetails'
+												className='mt-1 w-full rounded-md h-32 md:h-36'
+												theme='snow'
+												value={compensationDetails}
+												onChange={handleCompensationDetailsChange}
+												defaultValue={''}
+											/>
+										</div>
+									</div> */}
+
+									<h4
+										className={classNames(
+											!validations.postDetails && 'invisible',
+											'mt-28 md:mt-20 lg:mt-14 mb-2 text-sm text leading-6 text-red-500'
+										)}
+									>
+										{`Error: ${validations.postDetails}`}
+									</h4>
 								</div>
 							</div>
 
-							{/* buttons */}
-							<div className='pt-5'>
-								<div className='flex justify-end'>
+							{/* button */}
+							<div>
+								<div className='flex justify-end mt-6'>
 									<button
 										type='submit'
 										className='ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'

@@ -9,24 +9,28 @@ export default function NewListing({ formEntries }) {
 		title: '',
 		name: '',
 		website: '',
-		address: '',
 		city: '',
 		state: '',
-		zip: '',
-		salary: '',
-		interval: '',
-		schedule: '',
-		tier: '',
+		partner: '',
+		ranking: '',
+		referralBonus: '',
 		specialty: '',
 		type: '',
+		pastedCompDetails: '',
+		pastedDescription: '',
 	};
 	const [loading, setLoading] = useState(false);
 	const [post, setPost] = useState(newEntry);
 
-	const [description, setDescription] = useState('');
+	const [fullDescription, setFullDescription] = useState('');
 
-	const handleDescriptionChange = (text) => {
-		setDescription(text);
+	const handleFullDescriptionChange = (text) => {
+		setFullDescription(text);
+	};
+	const [compensationDetails, setCompensationDetails] = useState('');
+
+	const handleCompensationDetailsChange = (text) => {
+		setCompensationDetails(text);
 	};
 
 	const handleChange = (e) => {
@@ -34,6 +38,15 @@ export default function NewListing({ formEntries }) {
 			...post,
 			[e.target.id]: e.target.value,
 		});
+	};
+
+	const handleConversionChange = (e) => {
+		setPost({
+			...post,
+			[e.target.id]: e.target.value,
+		});
+		setCompensationDetails(post.pastedCompDetails);
+		setFullDescription(post.pastedDescription);
 	};
 
 	const handleSubmit = async (e) => {
@@ -44,15 +57,22 @@ export default function NewListing({ formEntries }) {
 
 		const postCopy = {
 			...post,
-			description,
+			fullDescription,
+			compensationDetails,
 			timestamp: serverTimestamp(),
 		};
+
+		delete postCopy.pastedCompDetails;
+		delete postCopy.pastedDescription;
 
 		const docRef = await addDoc(collection(db, 'listings'), postCopy);
 
 		setLoading(false);
 		// setPost(newEntry);
-		setDescription('');
+		// setPost({ ...post, pastedCompDetails: '', pastedDescription: '' });
+		setPost({ ...post, city: '', state: '' });
+		setFullDescription('');
+		setCompensationDetails('');
 		toast.success('Listing Saved');
 	};
 
@@ -63,9 +83,12 @@ export default function NewListing({ formEntries }) {
 				formEntries={formEntries}
 				handleSubmit={handleSubmit}
 				handleChange={handleChange}
-				description={description}
-				handleDescriptionChange={handleDescriptionChange}
+				fullDescription={fullDescription}
+				handleFullDescriptionChange={handleFullDescriptionChange}
+				compensationDetails={compensationDetails}
+				handleCompensationDetailsChange={handleCompensationDetailsChange}
 				loading={loading}
+				handleConversionChange={handleConversionChange}
 			/>
 		</>
 	);

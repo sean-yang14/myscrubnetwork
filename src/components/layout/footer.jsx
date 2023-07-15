@@ -1,15 +1,34 @@
 import Link from 'next/link';
-
-const navigation = {
-	main: [
-		// { name: 'Home', href: '/' },
-		{ name: 'Contact Us', href: '/contact-us' },
-	],
-};
+import { useRouter } from 'next/router';
 
 const footerYear = new Date().getFullYear();
 
 export default function Footer() {
+	const router = useRouter();
+
+	let navigation = null;
+
+	router.pathname === '/jobs'
+		? (navigation = {
+				main: [
+					{ name: 'Job Seekers', href: '/job-seekers' },
+					{ name: 'Contact Us', href: '/contact-us' },
+				],
+		  })
+		: router.pathname === '/contact-us'
+		? (navigation = {
+				main: [
+					{ name: 'Home', href: '/' },
+					// { name: 'Jobs', href: '/jobs' },
+				],
+		  })
+		: (navigation = {
+				main: [
+					{ name: 'Home', href: '/' },
+					{ name: 'Contact Us', href: '/contact-us' },
+				],
+		  });
+
 	return (
 		<footer className='bg-white'>
 			<div className='mx-auto max-w-7xl overflow-hidden mt-8 py-12 px-6 lg:px-8'>

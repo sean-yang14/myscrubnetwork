@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import { useState } from 'react';
 
 const ReactQuill = dynamic(import('react-quill'), { ssr: false });
 
@@ -8,8 +9,11 @@ export default function ListingDetails({
 	handleSubmit,
 	handleChange,
 	loading,
-	description,
-	handleDescriptionChange,
+	fullDescription,
+	handleFullDescriptionChange,
+	compensationDetails,
+	handleCompensationDetailsChange,
+	handleConversionChange,
 }) {
 	return (
 		<>
@@ -55,32 +59,6 @@ export default function ListingDetails({
 										htmlFor='specialty'
 										className='block text-sm font-medium text-gray-700'
 									>
-										Tier
-									</label>
-								</div>
-								<div className='mt-1'>
-									<select
-										required
-										name='tier'
-										id='tier'
-										onChange={handleChange}
-										value={post?.tier}
-										className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-									>
-										<option value=''>-- Select Tier -- </option>
-										<option value='1'>1</option>
-										<option value='2'>2</option>
-										<option value='3'>3</option>
-										<option value='4'>4</option>
-									</select>
-								</div>
-							</div>
-							<div>
-								<div className='flex justify-between'>
-									<label
-										htmlFor='specialty'
-										className='block text-sm font-medium text-gray-700'
-									>
 										Specialty
 									</label>
 								</div>
@@ -98,7 +76,7 @@ export default function ListingDetails({
 										<option value='endodontist'>Endodontist</option>
 										<option value='orthodontist'>Orthodontist</option>
 										<option value='periodontist'>Periodontist</option>
-										<option value='Prosthodontist'>Prosthodontist</option>
+										<option value='prosthodontist'>Prosthodontist</option>
 										<option value='oral_surgeon'>
 											Oral and Maxillofacial Surgeon
 										</option>
@@ -131,24 +109,78 @@ export default function ListingDetails({
 								</div>
 							</div>
 						</div>
-						<div className='mt-6'>
-							<label
-								htmlFor='description'
-								className='block text-sm font-medium text-gray-700'
-							>
-								Full Description
-							</label>
-							<ReactQuill
-								id='description'
-								name='description'
-								className='mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500'
-								theme='snow'
-								value={description}
-								onChange={handleDescriptionChange}
-								defaultValue={''}
-							/>
+						{/* Enter formatted html from ReactQuill here */}
+						<div className='grid grid-cols-2 gap-x-8'>
+							<div className='mt-6'>
+								<label
+									htmlFor='pastedCompDetails'
+									className='block text-sm font-medium text-gray-700'
+								>
+									Paste Formatted Compensation Details
+								</label>
+								<textArea
+									rows='7'
+									onChange={handleConversionChange}
+									className='block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+									name='pastedCompDetails'
+									id='pastedCompDetails'
+									value={post?.pastedCompDetails}
+								/>
+							</div>
+							<div className='mt-6'>
+								<label
+									htmlFor='pastedDescription'
+									className='block text-sm font-medium text-gray-700'
+								>
+									Paste Full Job Description
+								</label>
+								<textArea
+									rows='7'
+									onChange={handleConversionChange}
+									className='block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+									name='pastedDescription'
+									id='pastedDescription'
+									value={post?.pastedDescription}
+								/>
+							</div>
 						</div>
-						<div className='mt-8'>
+						<div className='mt-6 grid grid-cols-2 gap-x-8'>
+							<div>
+								<label
+									htmlFor='compensationDetails'
+									className='block text-sm font-medium text-gray-700'
+								>
+									Compensation Details
+								</label>
+								<ReactQuill
+									id='compensationDetails'
+									name='compensationDetails'
+									className='mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 h-36 block'
+									theme='snow'
+									value={compensationDetails}
+									onChange={handleCompensationDetailsChange}
+									defaultValue={''}
+								/>
+							</div>
+							<div>
+								<label
+									htmlFor='fullDescription'
+									className='block text-sm font-medium text-gray-700'
+								>
+									Full Description
+								</label>
+								<ReactQuill
+									id='fullDescription'
+									name='fullDescription'
+									className='mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 h-36'
+									theme='snow'
+									value={fullDescription}
+									onChange={handleFullDescriptionChange}
+									defaultValue={''}
+								/>
+							</div>
+						</div>
+						<div className='mt-24 lg:mt-16'>
 							<button
 								type='submit'
 								className='rounded-md border border-transparent bg-indigo-600 py-2 px-8 font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-base sm:text-sm'

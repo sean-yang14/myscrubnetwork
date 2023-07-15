@@ -3,7 +3,7 @@ import axios from 'axios';
 import { XMarkIcon, CheckIcon } from '@heroicons/react/24/outline';
 import { useUser } from '@/login/user';
 
-export default function Application({ id, company, title }) {
+export default function CandidateInfo() {
 	// const user = useUser();
 	const [validations, setValidations] = useState('');
 	const [status, setStatus] = useState({
@@ -17,14 +17,11 @@ export default function Application({ id, company, title }) {
 		referral: '',
 		first_name: '',
 		last_name: '',
-		// email: user?.email,
 		email: '',
 		location: '',
 		phone: '',
 		resume: '',
-		sponsorship: '',
-		licensed: '',
-		expectedLicensureDate: '',
+		request: '',
 	});
 
 	const handleServerResponse = (ok, msg) => {
@@ -44,9 +41,7 @@ export default function Application({ id, company, title }) {
 				location: '',
 				phone: '',
 				resume: '',
-				sponsorship: '',
-				licensed: '',
-				expectedLicensureDate: '',
+				request: '',
 			});
 		} else {
 			setStatus({
@@ -74,24 +69,17 @@ export default function Application({ id, company, title }) {
 	const handleOnSubmit = (e) => {
 		e.preventDefault();
 
-		// check if employment questions have been filled out
-		if (!formData.sponsorship || !formData.licensed) {
-			setValidations('All employment questions must be answered');
+		// validation for request field
+		if (!formData.request) {
+			setValidations('Must provide request details');
 			return;
 		}
 
 		setStatus((prevStatus) => ({ ...prevStatus, submitting: true }));
 
-		setFormData((prev) => ({
-			...prev,
-			post_id: id,
-			job_title: title,
-			company: company,
-		}));
-
 		axios({
 			method: 'POST',
-			url: 'https://formspree.io/f/xqkoqbll',
+			url: 'https://formspree.io/f/xpzgzvwr',
 			data: formData,
 			headers: {
 				'content-type': 'multipart/form-data',
@@ -149,12 +137,12 @@ export default function Application({ id, company, title }) {
 						</div>
 						<div className='mt-3 text-center sm:mt-5'>
 							<h3 className='text-xl font-medium leading-6 text-gray-900'>
-								Application Sent
+								Sent!
 							</h3>
 							<div className='mt-2'>
 								<p className='text-base text-gray-500'>
-									Thank you for using Scrub Network. We&#39;ll be in touch with
-									next steps soon.
+									Thank you for choosing to work with us. We&#39;ll be in touch
+									with next steps soon.
 								</p>
 							</div>
 						</div>
@@ -179,16 +167,13 @@ export default function Application({ id, company, title }) {
 
 	return (
 		<>
-			<main className='flex-1'>
-				<div className='relative mx-auto max-w-5xl md:px-8 xl:px-0'>
+			<main className='mx-auto max-w-7xl px-6 lg:flex lg:px-8 border-black rounded-md shadow-lg'>
+				<div className='w-full'>
 					<div className='pt-10 pb-16'>
-						<div className='px-4 sm:px-6 md:px-0'>
+						<div>
 							<h1 className='text-3xl font-bold tracking-tight text-gray-900'>
-								Application Form
+								Let Us Know How We Can Help
 							</h1>
-							<h2 className='text-xl font-semibold text-gray-900'>
-								For {title} {company === 'practice' ? '' : `at ${company}`}
-							</h2>
 						</div>
 						<form
 							className='space-y-8 divide-y divide-gray-200 mt-8'
@@ -197,31 +182,6 @@ export default function Application({ id, company, title }) {
 							{/* form inputs */}
 							<div className='space-y-8 divide-y divide-gray-200'>
 								<div>
-									<h3 className='text-lg font-medium leading-6 text-gray-900'>
-										Add referral information
-									</h3>
-									<div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-										<div className='sm:col-span-3'>
-											<label
-												htmlFor='referral'
-												className='block text-sm font-medium text-gray-700'
-											>
-												Referrer&#39;s email
-											</label>
-											<div className='mt-1'>
-												<input
-													type='email'
-													name='referral'
-													id='referral'
-													value={formData.referral}
-													onChange={handleChange}
-													className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-												/>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div className='pt-8'>
 									<h3 className='text-lg font-medium leading-6 text-gray-900'>
 										Add contact information
 									</h3>
@@ -291,7 +251,7 @@ export default function Application({ id, company, title }) {
 												htmlFor='city'
 												className='block text-sm font-medium text-gray-700'
 											>
-												City, state (optional)
+												Current city, state
 											</label>
 											<div className='mt-1'>
 												<input
@@ -300,6 +260,7 @@ export default function Application({ id, company, title }) {
 													id='location'
 													value={formData.location}
 													onChange={handleChange}
+													required
 													className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
 												/>
 											</div>
@@ -398,172 +359,31 @@ export default function Application({ id, company, title }) {
 									</div>
 								</div>
 
-								{/* Checkboxes */}
 								<div className='pt-8'>
-									<div>
-										<h3 className='text-lg font-medium leading-6 text-gray-900'>
-											Employment Questions
-										</h3>
-										{validations && (
-											<h4 className='mt-4 text leading-6 text-red-500 text-sm'>
-												{`${validations}`}
-											</h4>
-										)}
-									</div>
+									<h3 className='text-lg font-medium leading-6 text-gray-900'>
+										Add request details
+									</h3>
 									<div className='mt-6'>
-										<fieldset>
-											<legend className='sr-only'>sponsorship question</legend>
-											<div
-												className='text-sm font-medium text-gray-900'
-												aria-hidden='true'
+										<div>
+											<label
+												htmlFor='request'
+												className='block text-sm font-medium text-gray-700'
 											>
-												Will you now or in the future require sponsorship for
-												employment visa status?
+												Request
+											</label>
+											<div className='mt-1'>
+												<textarea
+													id='request'
+													name='request'
+													rows={7}
+													value={formData.request}
+													onChange={handleChange}
+													className='block shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border border-gray-300 rounded-md w-full'
+													placeholder='I am looking for...'
+													required
+												/>
 											</div>
-											<div className='mt-4 space-y-4'>
-												<div className='relative flex items-start'>
-													<div className='flex h-5 items-center'>
-														<input
-															id='yes_sponsorship'
-															name='sponsorship'
-															value='yes'
-															type='checkbox'
-															onChange={handleChange}
-															checked={formData.sponsorship === 'yes'}
-															className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
-														/>
-													</div>
-													<div className='ml-3 text-sm'>
-														<label
-															htmlFor='yes_sponsorship'
-															className='font-medium text-gray-700'
-														>
-															Yes
-														</label>
-													</div>
-												</div>
-												<div className='relative flex items-start'>
-													<div className='flex h-5 items-center'>
-														<input
-															id='no_sponsorship'
-															name='sponsorship'
-															value='no'
-															type='checkbox'
-															onChange={handleChange}
-															checked={formData.sponsorship === 'no'}
-															className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
-														/>
-													</div>
-													<div className='ml-3 text-sm'>
-														<label
-															htmlFor='no_sponsorship'
-															className='font-medium text-gray-700'
-														>
-															No
-														</label>
-													</div>
-												</div>
-											</div>
-										</fieldset>
-										<fieldset>
-											<legend className='sr-only'>licensed question</legend>
-											<div
-												className='text-sm font-medium text-gray-900 mt-4'
-												aria-hidden='true'
-											>
-												Do you have a valid dental license in the state?
-											</div>
-											<div className='mt-4 space-y-4'>
-												<div className='relative flex items-start'>
-													<div className='flex h-5 items-center'>
-														<input
-															id='yes_licensed'
-															name='licensed'
-															value='yes'
-															type='checkbox'
-															onChange={handleChange}
-															checked={formData.licensed === 'yes'}
-															className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
-														/>
-													</div>
-													<div className='ml-3 text-sm'>
-														<label
-															htmlFor='yes_licensed'
-															className='font-medium text-gray-700'
-														>
-															Yes
-														</label>
-													</div>
-												</div>
-												<div className='relative flex items-start'>
-													<div className='flex h-5 items-center'>
-														<input
-															id='future_licensed'
-															name='licensed'
-															value='future'
-															onChange={handleChange}
-															checked={formData.licensed === 'future'}
-															type='checkbox'
-															className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
-														/>
-													</div>
-													<div className='ml-3 text-sm'>
-														<label
-															htmlFor='future_licensed'
-															className='font-medium text-gray-700'
-														>
-															Not yet, but I will
-														</label>
-													</div>
-												</div>
-												<div className='relative flex items-start'>
-													<div className='flex h-5 items-center'>
-														<input
-															id='no_licensed'
-															name='licensed'
-															value='no'
-															type='checkbox'
-															onChange={handleChange}
-															checked={formData.licensed === 'no'}
-															className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
-														/>
-													</div>
-													<div className='ml-3 text-sm'>
-														<label
-															htmlFor='no_licensed'
-															className='font-medium text-gray-700'
-														>
-															No
-														</label>
-													</div>
-												</div>
-												{formData.licensed === 'future' && (
-													<div>
-														<div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-															<div className='sm:col-span-2'>
-																<label
-																	htmlFor='expectedLicensureDate'
-																	className='block text-sm font-medium text-gray-700'
-																>
-																	Expected licensure date
-																</label>
-																<div className='mt-1'>
-																	<input
-																		type='month'
-																		name='expectedLicensureDate'
-																		id='expectedLicensureDate'
-																		value={formData.expectedLicensureDate}
-																		onChange={handleChange}
-																		required
-																		className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-																	/>
-																</div>
-															</div>
-														</div>
-													</div>
-												)}
-											</div>
-										</fieldset>
+										</div>
 									</div>
 								</div>
 							</div>
