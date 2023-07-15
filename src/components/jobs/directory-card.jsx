@@ -135,24 +135,6 @@ export default function DirectoryCard({ job, current }) {
 							</div>
 						</div>
 						{/* practice name and location */}
-						{/* <div className='flex items-center space-x-4 mt-2'>
-							<h4 className='text-lg leading-6 text-indigo-700 font-medium'>
-								Aspen Dental
-							</h4>
-							<p className='text-xl'>&#x2022;</p>
-							<h4 className='leading-6 text-gray-900'>
-								{job.city}, {job.state}
-							</h4>
-
-							{job.name && (
-								<>
-									<h4 className='text-lg leading-6 text-indigo-700 font-medium'>
-										{job.name}
-									</h4>
-									<p className='text-xl'>&#x2022;</p>
-								</>
-							)}
-						</div> */}
 						<div className='mt-1 flex flex-col md:mt-0 md:flex-row md:flex-wrap'>
 							{job?.name && (
 								<div className='mt-2 flex items-center text-indigo-700 font-medium mr-4'>
@@ -163,13 +145,6 @@ export default function DirectoryCard({ job, current }) {
 									{job?.name}
 								</div>
 							)}
-							<div className='mt-2 flex items-center text-indigo-700 font-medium mr-4'>
-								<BuildingOfficeIcon
-									className='mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-700'
-									aria-hidden='true'
-								/>
-								Aspen Dental
-							</div>
 							<div className='mt-2 flex items-center text-gray-500 mr-4'>
 								<MapPinIcon
 									className='mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400'

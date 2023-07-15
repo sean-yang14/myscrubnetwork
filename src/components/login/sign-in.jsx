@@ -88,7 +88,8 @@ export default function SignInComponent({ instructions }) {
 						</div>
 					</Link>
 					<h2 className='mt-4 text-center text-3xl font-bold tracking-tight text-gray-900'>
-						{instructions ? 'Sign In to Apply' : 'Sign In'}
+						{/* {instructions ? 'Sign In to Apply' : 'Sign In'} */}
+						Sign In
 					</h2>
 				</div>
 
