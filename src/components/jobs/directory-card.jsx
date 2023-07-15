@@ -139,23 +139,23 @@ export default function DirectoryCard({ job, current }) {
 							{job?.name && (
 								<div className='mt-2 flex items-center text-indigo-700 font-medium mr-4'>
 									<BuildingOfficeIcon
-										className='mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400'
+										className='mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-700'
 										aria-hidden='true'
 									/>
 									{job?.name}
 								</div>
 							)}
-							<div className='mt-2 flex items-center text-gray-500 mr-4'>
+							<div className='mt-2 flex items-center text-indigo-700 font-medium mr-4'>
 								<MapPinIcon
-									className='mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400'
+									className='mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-700'
 									aria-hidden='true'
 								/>
 								{job?.city}, {job?.state}
 							</div>
 							{job?.partner && (
-								<div className='mt-2 flex items-center text-gray-500'>
+								<div className='mt-2 flex items-center font-medium text-gray-500'>
 									<UsersIcon
-										className='mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400'
+										className='mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-700'
 										aria-hidden='true'
 									/>
 									Partnered with&nbsp;
