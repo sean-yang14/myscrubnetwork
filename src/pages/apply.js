@@ -10,13 +10,6 @@ export default function Apply() {
   )
 }
 
-// export async function getStaticProps(context) {
-//   return {
-//     props: {
-//       protected: true,
-//     },
-//   }
-// }
 
 Apply.getLayout = function getLayout(page) {
   return (
