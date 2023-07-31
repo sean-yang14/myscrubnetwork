@@ -20,7 +20,7 @@ export async function getServerSideProps(context) {
       company,
       title,
       post_id,
-      protected: true,
+      // protected: true,
     },
   }
 }
