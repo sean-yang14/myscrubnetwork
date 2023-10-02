@@ -93,7 +93,12 @@ export default function DirectoryCard({ job, current }) {
 			<div className='overflow-hidden bg-white border-gray-200 border-[1px] shadow rounded-lg  hover:bg-gray-50 mb-6'>
 				<div className='grid grid-cols-1 md:grid-cols-3 relative '>
 					<div className='absolute top-4 right-4 md:right-6'>
-						<Link href={`/jobs/${job?.id}`} className='flex items-center'>
+						<Link
+							href={`/jobs/${job?.id}`}
+							className='flex items-center'
+							target='_blank'
+							rel='noopener noreferrer'
+						>
 							{/* <p className='text-xs underline mr-4 text-blue-700 decoration-blue-700'>
 								link to save or share
 							</p> */}
@@ -180,6 +185,8 @@ export default function DirectoryCard({ job, current }) {
 									job?.title
 								}/${job?.id}`}
 								className='w-full sm:w-fit inline-flex justify-center rounded-md bg-indigo-600 px-6 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+								target='_blank'
+								rel='noopener noreferrer'
 							>
 								<span>Apply</span>
 							</Link>

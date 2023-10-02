@@ -100,7 +100,7 @@ export default function FullPagePost(post_id) {
 									aria-hidden='true'
 								/>
 								Partnered with{' '}
-								<span className='text-indigo-700 text-medium'>
+								<span className='text-indigo-700 text-medium ml-1'>
 									{post?.partner}
 								</span>
 							</div>
