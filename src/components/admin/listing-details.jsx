@@ -105,6 +105,7 @@ export default function ListingDetails({
 										<option value=''>-- Select Practice Type -- </option>
 										<option value='private'>Private</option>
 										<option value='dso'>DSO</option>
+										<option value='unknown'>Unknown</option>
 									</select>
 								</div>
 							</div>

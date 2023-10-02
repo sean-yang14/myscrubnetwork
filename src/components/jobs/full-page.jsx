@@ -86,13 +86,6 @@ export default function FullPagePost(post_id) {
 								{post?.name}
 							</div>
 						)}
-						<div className='mt-2 flex items-center text-indigo-700 font-medium'>
-							<BuildingOfficeIcon
-								className='mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-700'
-								aria-hidden='true'
-							/>
-							Aspen Dental
-						</div>
 						<div className='mt-2 flex items-center text-gray-500'>
 							<MapPinIcon
 								className='mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400'
